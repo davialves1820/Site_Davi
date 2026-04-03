@@ -1,0 +1,261 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── CSS Custom Properties ─────────────────────────────── */
+:root {
+  --blue-deep:   #020b18;
+  --blue-dark:   #041428;
+  --blue-mid:    #0a2540;
+  --blue-accent: #0062ff;
+  --blue-bright: #2e8fff;
+  --blue-neon:   #00c6ff;
+  --blue-glow:   #38bdf8;
+  --blue-pale:   #7dd3fc;
+}
+
+/* ─── Base ───────────────────────────────────────────────── */
+html { scroll-behavior: smooth; }
+
+body {
+  background-color: var(--blue-deep);
+  cursor: none;
+}
+
+/* ─── Custom Cursor ──────────────────────────────────────── */
+.cursor-dot {
+  position: fixed;
+  width: 10px;
+  height: 10px;
+  background: var(--blue-neon);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  mix-blend-mode: screen;
+  transform: translate(-50%, -50%);
+  transition: transform 0.08s ease, width 0.2s, height 0.2s;
+}
+.cursor-ring {
+  position: fixed;
+  width: 36px;
+  height: 36px;
+  border: 1.5px solid rgba(0,198,255,0.6);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9998;
+  mix-blend-mode: screen;
+  transform: translate(-50%, -50%);
+  transition: transform 0.25s cubic-bezier(0.16,1,0.3,1),
+              width 0.3s, height 0.3s, border-color 0.3s;
+}
+.cursor-dot.hover  { width: 6px; height: 6px; }
+.cursor-ring.hover { width: 60px; height: 60px; border-color: var(--blue-neon); }
+
+/* ─── Noise texture overlay ──────────────────────────────── */
+.noise-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9990;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-size: 200px;
+  animation: noise 0.2s steps(1) infinite;
+}
+
+/* ─── Scanline effect ────────────────────────────────────── */
+.scan-line {
+  position: fixed;
+  top: -100vh;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg,
+    transparent 0%, rgba(0,198,255,0.08) 50%, transparent 100%);
+  animation: scanLine 8s linear infinite;
+  pointer-events: none;
+  z-index: 9989;
+}
+
+/* ─── Glitch text ────────────────────────────────────────── */
+.glitch-wrap { position: relative; display: inline-block; }
+.glitch-wrap::before,
+.glitch-wrap::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+}
+.glitch-wrap::before {
+  color: var(--blue-neon);
+  animation: glitch1 4s infinite;
+}
+.glitch-wrap::after {
+  color: var(--blue-accent);
+  animation: glitch2 4s infinite;
+}
+
+/* ─── Gradient text ──────────────────────────────────────── */
+.gradient-text {
+  background: linear-gradient(135deg, var(--blue-bright), var(--blue-neon));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ─── Clip-path button shape ─────────────────────────────── */
+.btn-clip {
+  clip-path: polygon(14px 0%, 100% 0%, calc(100% - 14px) 100%, 0% 100%);
+}
+
+/* ─── Timeline connector ─────────────────────────────────── */
+.timeline-line {
+  background: linear-gradient(180deg,
+    transparent 0%, var(--blue-accent) 20%, var(--blue-neon) 80%, transparent 100%);
+}
+
+/* ─── Card hover glow ────────────────────────────────────── */
+.card-glow {
+  transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
+}
+.card-glow:hover {
+  border-color: rgba(0,198,255,0.45) !important;
+  box-shadow: 0 0 0 1px rgba(0,198,255,0.1),
+              0 20px 60px rgba(0,98,255,0.18);
+  transform: translateY(-6px);
+}
+
+/* ─── Scrollbar ──────────────────────────────────────────── */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: var(--blue-deep); }
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--blue-accent), var(--blue-neon));
+  border-radius: 2px;
+}
+
+/* ─── Selection ──────────────────────────────────────────── */
+::selection {
+  background: rgba(0,98,255,0.35);
+  color: white;
+}
+
+/* ─── Keyframes ──────────────────────────────────────────── */
+@keyframes noise {
+  0%,100% { background-position: 0 0; }
+  10%  { background-position: -5% -10%; }
+  20%  { background-position: -15% 5%; }
+  30%  { background-position: 7% -25%; }
+  40%  { background-position: 20% 25%; }
+  50%  { background-position: -25% 10%; }
+  60%  { background-position: 15% 5%; }
+  70%  { background-position: 0 15%; }
+  80%  { background-position: 25% 35%; }
+  90%  { background-position: -10% 10%; }
+}
+
+@keyframes scanLine {
+  0%   { top: -4px; }
+  100% { top: 100vh; }
+}
+
+@keyframes glitch1 {
+  0%,100% { transform: translate(0); clip-path: polygon(0 0,100% 0,100% 35%,0 35%); }
+  20%     { transform: translate(-3px,2px); clip-path: polygon(0 15%,100% 15%,100% 45%,0 45%); }
+  40%     { transform: translate(3px,-2px); clip-path: polygon(0 0,100% 0,100% 35%,0 35%); }
+  60%     { transform: translate(0); }
+}
+
+@keyframes glitch2 {
+  0%,100% { transform: translate(0); clip-path: polygon(0 65%,100% 65%,100% 100%,0 100%); }
+  20%     { transform: translate(3px,-2px); clip-path: polygon(0 55%,100% 55%,100% 85%,0 85%); }
+  40%     { transform: translate(-3px,2px); clip-path: polygon(0 65%,100% 65%,100% 100%,0 100%); }
+  60%     { transform: translate(0); }
+}
+
+@keyframes revealUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes orbit {
+  from { transform: rotate(0deg) translateX(200px); }
+  to   { transform: rotate(360deg) translateX(200px); }
+}
+
+@keyframes spinSlow    { to { transform: rotate(360deg); } }
+@keyframes spinReverse { to { transform: rotate(-360deg); } }
+
+@keyframes float {
+  0%,100% { transform: translateY(0px); }
+  50%     { transform: translateY(-18px); }
+}
+
+@keyframes blink {
+  0%,100% { opacity: 1; }
+  50%     { opacity: 0; }
+}
+
+@keyframes barFill {
+  from { width: 0; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-30px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+/* Hero shimmer */
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+.shimmer-text {
+  background: linear-gradient(90deg,
+    var(--blue-bright) 0%,
+    var(--blue-neon) 30%,
+    white 50%,
+    var(--blue-neon) 70%,
+    var(--blue-bright) 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 5s linear infinite;
+}
+
+/* Reveal on scroll */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1),
+              transform 0.7s cubic-bezier(0.16,1,0.3,1);
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-30px);
+  transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1),
+              transform 0.7s cubic-bezier(0.16,1,0.3,1);
+}
+.reveal-left.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Magnetic button */
+.magnetic { transition: transform 0.3s cubic-bezier(0.16,1,0.3,1); }
+
+/* Hex grid bg */
+.hex-bg {
+  background-image:
+    radial-gradient(circle at 1px 1px, rgba(0,198,255,0.08) 1px, transparent 0);
+  background-size: 32px 32px;
+}
