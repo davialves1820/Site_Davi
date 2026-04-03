@@ -7,7 +7,6 @@ export const PERSONAL = {
   role: 'Full Stack Developer',
   location: 'João Pessoa, Paraíba 🇧🇷',
   email: 'davialvesr18@gmail.com',
-  phone: '(83) 99444-0061',
   github: 'https://github.com/davialves1820',
   linkedin: 'https://www.linkedin.com/in/davi-rodrigues1820/',
   bio: [
