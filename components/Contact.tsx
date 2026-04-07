@@ -1,5 +1,6 @@
 'use client'
-import { useEffect, useRef, useState } from 'react'
+import { useState } from 'react'
+import { useReveal } from '@/lib/hooks'
 import { PERSONAL } from '@/lib/data'
 
 const LINKS = [
@@ -17,7 +18,7 @@ const LINKS = [
     url: PERSONAL.linkedin,
     icon: (
       <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-        <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+        <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
       </svg>
     ),
   },
@@ -25,16 +26,9 @@ const LINKS = [
 
 export default function Contact() {
   const [copied, setCopied] = useState(false)
-  const sectionRef = useRef<HTMLElement>(null)
-
-  useEffect(() => {
-    const io = new IntersectionObserver(
-      entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible') }),
-      { threshold: 0.1 }
-    )
-    document.querySelectorAll('.reveal, .reveal-left').forEach(el => io.observe(el))
-    return () => io.disconnect()
-  }, [])
+  const { ref: headRef, revealClass: headReveal, transitionClass: headTransition } = useReveal()
+  const { ref: emailRef, revealClass: emailReveal, transitionClass: emailTransition } = useReveal(0.15)
+  const { ref: linksRef, revealClass: linksReveal, transitionClass: linksTransition } = useReveal(0.2)
 
   const copyEmail = () => {
     navigator.clipboard.writeText(PERSONAL.email)
@@ -45,7 +39,6 @@ export default function Contact() {
   return (
     <section
       id="contact"
-      ref={sectionRef}
       className="relative z-10 py-36 text-center overflow-hidden"
     >
       {/* Large background text */}
@@ -67,7 +60,7 @@ export default function Contact() {
       />
 
       <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
-        <div className="reveal">
+        <div ref={headRef} className={`${headTransition} ${headReveal}`}>
           <p className="font-mono text-[0.7rem] tracking-[0.35em] uppercase text-[--blue-neon] mb-3">
             // 06
           </p>
@@ -84,7 +77,7 @@ export default function Contact() {
         </div>
 
         {/* Email button */}
-        <div className="reveal mb-12">
+        <div ref={emailRef} className={`${emailTransition} ${emailReveal} mb-12`}>
           <button
             onClick={copyEmail}
             className="group relative inline-block font-extrabold tracking-tight
@@ -110,7 +103,7 @@ export default function Contact() {
         </div>
 
         {/* Links row */}
-        <div className="reveal flex flex-wrap gap-4 justify-center">
+        <div ref={linksRef} className={`${linksTransition} ${linksReveal} flex flex-wrap gap-4 justify-center`}>
           {LINKS.map(({ label, url, icon }) => (
             <a
               key={label}

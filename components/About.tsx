@@ -1,22 +1,10 @@
 'use client'
-import { useEffect, useRef } from 'react'
+import { useReveal } from '@/lib/hooks'
 import { PERSONAL } from '@/lib/data'
 
 export default function About() {
-  const barsRef = useRef<HTMLDivElement>(null)
-
-  useEffect(() => {
-    /* Scroll reveal */
-    const io = new IntersectionObserver(
-      entries => entries.forEach(e => {
-        if (e.isIntersecting) e.target.classList.add('visible')
-      }),
-      { threshold: 0.15 }
-    )
-    document.querySelectorAll('.reveal, .reveal-left').forEach(el => io.observe(el))
-
-    return () => io.disconnect()
-  }, [])
+  const { ref: leftRef, revealClass: leftReveal, transitionClass: leftTransition } = useReveal()
+  const { ref: rightRef, revealClass: rightReveal, transitionClass: rightTransition } = useReveal(0.2)
 
   return (
     <section id="about" className="relative z-10 py-36">
@@ -24,7 +12,7 @@ export default function About() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
 
           {/* ── Left ─────────────────────────────────────────── */}
-          <div className="reveal-left">
+          <div ref={leftRef} className={`${leftTransition} ${leftReveal}`}>
             <p className="font-mono text-[0.7rem] tracking-[0.35em] uppercase text-[--blue-neon] mb-3">
               // 01
             </p>
@@ -44,7 +32,7 @@ export default function About() {
           </div>
 
           {/* ── Right: Photo Space ──────────────────────────────────── */}
-          <div className="reveal relative group">
+          <div ref={rightRef} className={`${rightTransition} ${rightReveal} relative group`}>
             <div className="relative w-full aspect-square max-w-[440px] mx-auto">
               {/* Decorative background glow */}
               <div

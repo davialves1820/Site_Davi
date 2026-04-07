@@ -9,6 +9,7 @@ export const PERSONAL = {
   email: 'davialvesr18@gmail.com',
   github: 'https://github.com/davialves1820',
   linkedin: 'https://www.linkedin.com/in/davi-rodrigues1820/',
+  resume: '/Davi_Alves_CV.pdf',
   bio: [
     'Desenvolvedor Full Stack de 20 anos, católico apostólico romano e graduando em Ciência da Computação na UFPB desde 2023. Busco o desenvolvimento integral através do equilíbrio entre a fé, o intelecto e a saúde, integrando a disciplina dos esportes e a criatividade dos animes à minha rotina.',
     'Apaixonado por criar soluções que impactam a vida real, atuo simultaneamente em pesquisa, liderança e desenvolvimento de produtos. Fundei e lidero a Connecta CI, grupo de tecnologia da UFPB, e sou desenvolvedor no laboratório LAVID. Acredito que o melhor código é aquele que resolve problemas reais para pessoas reais.',

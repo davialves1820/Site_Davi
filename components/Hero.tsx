@@ -15,8 +15,20 @@ export default function Hero() {
   const [deleting, setDeleting] = useState(false)
   const [visible, setVisible] = useState(false)
 
+  const [repoCount, setRepoCount] = useState<number | null>(null)
+
   /* fade-in on mount */
-  useEffect(() => { setTimeout(() => setVisible(true), 100) }, [])
+  useEffect(() => { 
+    setTimeout(() => setVisible(true), 100) 
+    
+    // Fetch GitHub repo count
+    fetch('https://api.github.com/users/davialves1820')
+      .then(res => res.json())
+      .then(data => {
+        if (data.public_repos) setRepoCount(data.public_repos)
+      })
+      .catch(err => console.error('Error fetching GitHub data:', err))
+  }, [])
 
   /* typing effect */
   useEffect(() => {
@@ -103,46 +115,57 @@ export default function Hero() {
           </p>
 
           {/* CTAs */}
-          <div className="flex gap-5 flex-wrap">
+          <div className="flex gap-4 flex-wrap">
             <a
-              href="#experience"
-              className="btn-clip px-9 py-4 bg-gradient-to-r from-[--blue-accent] to-[--blue-bright]
-                font-mono text-[0.78rem] tracking-[0.15em] uppercase text-white
-                hover:-translate-y-1 hover:shadow-[0_20px_60px_rgba(0,98,255,0.5)]
+              href="#projects"
+              className="px-8 py-3.5 bg-gradient-to-r from-[--blue-accent] to-[--blue-bright]
+                font-mono text-[0.72rem] tracking-[0.15em] uppercase text-white
+                hover:-translate-y-1 hover:shadow-[0_15px_40px_rgba(0,98,255,0.4)]
                 transition-all duration-300"
             >
-              Ver Experiências
+              Ver Projetos
             </a>
             <a
-              href="#contact"
-              className="btn-clip px-9 py-4 bg-transparent border border-[rgba(0,198,255,0.35)]
-                font-mono text-[0.78rem] tracking-[0.15em] uppercase text-[--blue-neon]
+              href={PERSONAL.resume}
+              download
+              className="px-8 py-3.5 bg-transparent border border-[rgba(0,198,255,0.35)]
+                font-mono text-[0.72rem] tracking-[0.15em] uppercase text-[--blue-neon]
                 hover:bg-[rgba(0,198,255,0.08)] hover:border-[--blue-neon]
                 hover:shadow-[0_0_30px_rgba(0,198,255,0.15)]
-                transition-all duration-300"
+                transition-all duration-300 flex items-center gap-2"
             >
-              Contato
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v4" />
+                <polyline points="7 10 12 15 17 10" />
+                <line x1="12" y1="15" x2="12" y2="3" />
+              </svg>
+              Baixar CV
             </a>
           </div>
 
           {/* Social micro-links */}
           <div className="flex gap-6 mt-10">
-            {[
-              { label: 'GitHub', url: PERSONAL.github },
-              { label: 'LinkedIn', url: PERSONAL.linkedin },
-            ].map(s => (
-              <a
-                key={s.label}
-                href={s.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="font-mono text-[0.65rem] tracking-[0.2em] uppercase text-[--blue-pale]
-                  hover:text-[--blue-neon] transition-colors duration-300 border-b border-transparent
-                  hover:border-[--blue-neon] pb-0.5"
-              >
-                {s.label} ↗
-              </a>
-            ))}
+            <a
+              href={PERSONAL.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group font-mono text-[0.65rem] tracking-[0.2em] uppercase text-[--blue-pale]
+                hover:text-[--blue-neon] transition-all duration-300 flex flex-col gap-1"
+            >
+              <div>GitHub ↗</div>
+              <div className="text-[10px] text-[rgba(0,198,255,0.4)] lowercase tracking-normal group-hover:text-[--blue-neon] transition-colors">
+                {repoCount !== null ? `${repoCount} repos` : '... repos'}
+              </div>
+            </a>
+            <a
+              href={PERSONAL.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-mono text-[0.65rem] tracking-[0.2em] uppercase text-[--blue-pale]
+                hover:text-[--blue-neon] transition-colors duration-300 h-fit"
+            >
+              LinkedIn ↗
+            </a>
           </div>
         </div>
 

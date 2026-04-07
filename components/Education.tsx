@@ -1,16 +1,10 @@
 'use client'
-import { useEffect } from 'react'
+import { useReveal } from '@/lib/hooks'
 import { EDUCATION, AWARDS } from '@/lib/data'
 
 export default function Education() {
-  useEffect(() => {
-    const io = new IntersectionObserver(
-      entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible') }),
-      { threshold: 0.1 }
-    )
-    document.querySelectorAll('.reveal, .reveal-left').forEach(el => io.observe(el))
-    return () => io.disconnect()
-  }, [])
+  const { ref: headRef, revealClass: headReveal, transitionClass: headTransition } = useReveal()
+  const { ref: cardRef, revealClass: cardReveal, transitionClass: cardTransition } = useReveal(0.15)
 
   return (
     <section
@@ -20,7 +14,7 @@ export default function Education() {
     >
       <div className="max-w-7xl mx-auto px-6 md:px-12">
         {/* Header */}
-        <div className="reveal mb-20">
+        <div ref={headRef} className={`${headTransition} ${headReveal} mb-20`}>
           <p className="font-mono text-[0.7rem] tracking-[0.35em] uppercase text-[--blue-neon] mb-3">
             // 05
           </p>
@@ -34,8 +28,8 @@ export default function Education() {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Education card */}
-          <div className="reveal card-glow p-10 border border-[rgba(0,198,255,0.1)]
-            bg-[rgba(4,20,40,0.6)] backdrop-blur-sm relative overflow-hidden">
+          <div ref={cardRef} className={`${cardTransition} ${cardReveal} card-glow p-10 border border-[rgba(0,198,255,0.1)]
+            bg-[rgba(4,20,40,0.6)] backdrop-blur-sm relative overflow-hidden`}>
             {/* Decorative corner */}
             <div
               className="absolute top-0 right-0 w-40 h-40 opacity-10 pointer-events-none"
@@ -85,34 +79,43 @@ export default function Education() {
 
           {/* Awards cards */}
           <div className="space-y-5">
-            {AWARDS.map(({ medal, title, desc }, i) => (
-              <div
-                key={title}
-                className="reveal card-glow flex items-start gap-6 p-8
-                  border border-[rgba(0,198,255,0.1)]
-                  bg-[rgba(4,20,40,0.6)] backdrop-blur-sm relative overflow-hidden"
-                style={{ transitionDelay: `${i * 100}ms` }}
-              >
-                <div
-                  className="absolute inset-0 opacity-0 hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-                  style={{ background: 'linear-gradient(135deg, rgba(0,98,255,0.04), transparent)' }}
-                />
-
-                <span
-                  className="text-4xl flex-shrink-0"
-                  style={{ filter: 'drop-shadow(0 0 16px rgba(255,215,0,0.4))' }}
-                >
-                  {medal}
-                </span>
-                <div>
-                  <h3 className="text-lg font-bold text-white mb-1">{title}</h3>
-                  <p className="font-mono text-[0.78rem] text-[--blue-pale] leading-relaxed">{desc}</p>
-                </div>
-              </div>
+            {AWARDS.map((award, i) => (
+              <AwardCard key={award.title} award={award} delay={i * 100} />
             ))}
           </div>
         </div>
       </div>
     </section>
+  )
+}
+
+function AwardCard({ award, delay }: { award: any; delay: number }) {
+  const { ref, revealClass, transitionClass } = useReveal(0.1)
+  const { medal, title, desc } = award
+
+  return (
+    <div
+      ref={ref}
+      className={`${transitionClass} ${revealClass} card-glow flex items-start gap-6 p-8
+        border border-[rgba(0,198,255,0.1)]
+        bg-[rgba(4,20,40,0.6)] backdrop-blur-sm relative overflow-hidden`}
+      style={{ transitionDelay: `${delay}ms` }}
+    >
+      <div
+        className="absolute inset-0 opacity-0 hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+        style={{ background: 'linear-gradient(135deg, rgba(0,98,255,0.04), transparent)' }}
+      />
+
+      <span
+        className="text-4xl flex-shrink-0"
+        style={{ filter: 'drop-shadow(0 0 16px rgba(255,215,0,0.4))' }}
+      >
+        {medal}
+      </span>
+      <div>
+        <h3 className="text-lg font-bold text-white mb-1">{title}</h3>
+        <p className="font-mono text-[0.78rem] text-[--blue-pale] leading-relaxed">{desc}</p>
+      </div>
+    </div>
   )
 }
