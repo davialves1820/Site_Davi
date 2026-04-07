@@ -1,4 +1,4 @@
-# 🌌 Portfolio — Davi Alves Rodrigues
+# 🌌 Portfolio
 
 ---
 
