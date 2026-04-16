@@ -86,7 +86,3 @@ Lá você encontrará objetos exportados para:
 | **GitHub** | [@davialves1820](https://github.com/davialves1820) |
 
 ---
-
-<p align="center">
-  Desenvolvido com 💙 por <b>Davi Alves Rodrigues</b>
-</p>
