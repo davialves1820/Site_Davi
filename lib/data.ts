@@ -50,8 +50,6 @@ export const SKILLS = [
   },
 ]
 
-
-
 export interface Experience {
   period: string
   current: boolean
@@ -143,40 +141,46 @@ export const EXPERIENCES: Experience[] = [
 
 export const PROJECTS = [
   {
+    name: 'Central Católica',
+    desc: 'Plataforma religiosa completa com Bíblia Sagrada, Liturgia Diária, Calendário Litúrgico, Orações, Santos do Dia e Notícias do Vaticano — feita para católicos que buscam aprofundar a fé no dia a dia.',
+    stack: ['Next.js', 'TypeScript', 'Tailwind', 'APIs'],
+    url: 'https://central-catolica.vercel.app/',
+    live: true, // tem demo ao vivo
+  },
+  {
     name: 'Algoritmos de Otimização (TSP)',
     desc: 'Solução para o Problema do Caixeiro Viajante aplicada à cidade de João Pessoa. Implementa e compara múltiplos algoritmos heurísticos com visualização de rotas no mapa real.',
     stack: ['Python', 'Algoritmos', 'Grafos'],
     url: 'https://github.com/davialves1820/Algoritmos-de-otimizacao',
-  },
-  {
-    name: 'CodePay',
-    desc: 'Plataforma de pagamento com TypeScript — fluxo completo de transações, autenticação de usuários e integração com gateways de pagamento.',
-    stack: ['TypeScript', 'Node.js', 'APIs'],
-    url: 'https://github.com/davialves1820/CodePay',
+    live: false,
   },
   {
     name: 'Backend Node',
     desc: 'API RESTful modular em Node.js com autenticação JWT, CRUD completo, validações e documentação. Base de referência para projetos full stack.',
     stack: ['Node.js', 'JavaScript', 'REST'],
     url: 'https://github.com/davialves1820/BackendNode',
+    live: false,
   },
   {
     name: 'LeetCode Answers',
     desc: 'Coleção de soluções para problemas do LeetCode em C++, com foco em complexidade temporal e espacial ótima. Algoritmos clássicos e estruturas de dados.',
     stack: ['C++', 'Algoritmos', 'DSA'],
     url: 'https://github.com/davialves1820/LeetCode-Answers',
+    live: false,
   },
   {
     name: 'Jantar dos Filósofos',
     desc: 'Implementação clássica do problema de concorrência em C, com semáforos e mutexes para demonstrar conceitos de sistemas operacionais.',
     stack: ['C', 'Concorrência', 'SO'],
     url: 'https://github.com/davialves1820/Jantar-dos-Filosofos',
+    live: false,
   },
   {
     name: 'Algoritmos de Ordenação',
     desc: 'Benchmark comparativo de algoritmos de ordenação — Bubble, Merge, Quick, Heap — com análise de performance em diferentes tipos de entrada.',
     stack: ['C', 'Algoritmos', 'Benchmark'],
     url: 'https://github.com/davialves1820/Algoritmos-de-Ordenacao',
+    live: false,
   },
 ]
 
@@ -195,4 +199,39 @@ export const AWARDS = [
   }
 ]
 
+// ── Interesses Pessoais ───────────────────────────────────
+export const ANIMES = [
+  {
+    title: 'Steins;Gate',
+    genre: 'Sci-fi · Thriller',
+    quote: '"O homem não pode ganhar algo sem sacrificar algo em troca."',
+    emoji: '⏳',
+    color: 'rgba(0,198,255,0.15)',
+  },
+  {
+    title: 'Attack on Titan',
+    genre: 'Ação · Drama',
+    quote: '"Se você não arrisca sua vida, você não pode criar um futuro."',
+    emoji: '⚔️',
+    color: 'rgba(0,98,255,0.15)',
+  },
+  {
+    title: 'Death Note',
+    genre: 'Suspense · Psicológico',
+    quote: '"Humanos que não podem ser usados merecem morrer."',
+    emoji: '📓',
+    color: 'rgba(46,143,255,0.12)',
+  },
+]
 
+export const FAITH_QUOTE = {
+  text: '"A razão é a maior perfeição do homem, e é pela razão que o homem é capaz de encontrar a Deus."',
+  author: 'São Tomás de Aquino',
+}
+
+export const CURRENT_VIBE = {
+  reading: 'Suma Teológica — São Tomás de Aquino',
+  grinding: 'LeetCode · Grafos & DP',
+  building: 'Central Católica + LAVID',
+  sport: 'Musculação 🏋️',
+}

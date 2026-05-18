@@ -81,21 +81,28 @@ export default function Projects() {
 }
 
 function ProjectCard({ project, delay }: { project: any; delay: number }) {
-  const { ref, revealClass, transitionClass } = useReveal<HTMLAnchorElement>(0.1)
-  const { name, desc, stack, url } = project
+  const { ref, revealClass, transitionClass } = useReveal<HTMLDivElement>(0.1)
+  const { name, desc, stack, url, live } = project
 
   return (
-    <a
+    <div
       ref={ref}
-      href={url}
-      target="_blank"
-      rel="noopener noreferrer"
       className={`${transitionClass} ${revealClass} card-glow group relative flex flex-col p-7
-        border border-[rgba(0,198,255,0.1)]
-        bg-[rgba(4,20,40,0.55)] backdrop-blur-sm overflow-hidden
-        no-underline`}
-      style={{ transitionDelay: `${delay}ms` }}
+        border bg-[rgba(4,20,40,0.55)] backdrop-blur-sm overflow-hidden`}
+      style={{
+        transitionDelay: `${delay}ms`,
+        borderColor: live ? 'rgba(0,198,255,0.2)' : 'rgba(0,198,255,0.1)',
+        boxShadow: live ? '0 0 0 1px rgba(0,198,255,0.05), inset 0 0 40px rgba(0,98,255,0.04)' : 'none',
+      }}
     >
+      {/* Featured glow for live projects */}
+      {live && (
+        <div
+          className="absolute inset-0 pointer-events-none opacity-40"
+          style={{ background: 'radial-gradient(ellipse at top left, rgba(0,198,255,0.07), transparent 60%)' }}
+        />
+      )}
+
       {/* Hover corner glow */}
       <div
         className="absolute top-0 right-0 w-32 h-32 opacity-0 group-hover:opacity-100
@@ -105,26 +112,50 @@ function ProjectCard({ project, delay }: { project: any; delay: number }) {
 
       {/* Top bar */}
       <div className="flex items-start justify-between mb-5">
-        <div
-          className="w-9 h-9 rounded flex items-center justify-center
-            bg-[rgba(0,98,255,0.15)] border border-[rgba(0,198,255,0.2)]
-            group-hover:border-[--blue-neon] transition-colors duration-300"
-        >
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
-            stroke="var(--blue-neon)" strokeWidth="2" strokeLinecap="round">
-            <polyline points="16 18 22 12 16 6"/>
-            <polyline points="8 6 2 12 8 18"/>
-          </svg>
+        <div className="flex items-center gap-2">
+          <div
+            className="w-9 h-9 rounded flex items-center justify-center
+              bg-[rgba(0,98,255,0.15)] border border-[rgba(0,198,255,0.2)]
+              group-hover:border-[--blue-neon] transition-colors duration-300"
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+              stroke="var(--blue-neon)" strokeWidth="2" strokeLinecap="round">
+              <polyline points="16 18 22 12 16 6"/>
+              <polyline points="8 6 2 12 8 18"/>
+            </svg>
+          </div>
+
+          {/* Live badge */}
+          {live && (
+            <span className="inline-flex items-center gap-1.5 px-2.5 py-1
+              font-mono text-[0.55rem] tracking-[0.2em] uppercase text-[--blue-neon]
+              border border-[rgba(0,198,255,0.35)] bg-[rgba(0,198,255,0.08)]">
+              <span
+                className="inline-block w-1.5 h-1.5 rounded-full bg-[--blue-neon]"
+                style={{ animation: 'blink 1.2s step-end infinite' }}
+              />
+              Live
+            </span>
+          )}
         </div>
-        <svg
-          width="16" height="16" viewBox="0 0 24 24" fill="none"
-          stroke="var(--blue-pale)" strokeWidth="1.5" strokeLinecap="round"
-          className="group-hover:stroke-[--blue-neon] group-hover:translate-x-0.5 group-hover:-translate-y-0.5
-            transition-all duration-300"
+
+        {/* Link icon — GitHub or external */}
+        <a
+          href={url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-[--blue-pale] hover:text-[--blue-neon] transition-colors duration-300"
+          onClick={e => e.stopPropagation()}
         >
-          <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
-          <polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>
-        </svg>
+          <svg
+            width="16" height="16" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"
+            className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300"
+          >
+            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+            <polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>
+          </svg>
+        </a>
       </div>
 
       {/* Name */}
@@ -151,6 +182,20 @@ function ProjectCard({ project, delay }: { project: any; delay: number }) {
           </span>
         ))}
       </div>
-    </a>
+
+      {/* Bottom CTA for live projects */}
+      {live && (
+        <a
+          href={url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-5 flex items-center gap-2 font-mono text-[0.65rem] tracking-[0.15em] uppercase
+            text-[--blue-neon] hover:gap-3 transition-all duration-300 w-fit"
+        >
+          Acessar projeto
+          <span>→</span>
+        </a>
+      )}
+    </div>
   )
 }
