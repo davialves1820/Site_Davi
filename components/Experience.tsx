@@ -1,40 +1,52 @@
 'use client'
-import { useState } from 'react'
-import { useReveal } from '@/lib/hooks'
+import { useEffect, useRef, useState } from 'react'
 import { EXPERIENCES } from '@/lib/data'
 
 export default function Experience() {
-  const { ref: headRef, revealClass: headReveal, transitionClass: headTransition } = useReveal()
+  const ref = useRef<HTMLDivElement>(null)
+  const [visible, setVisible] = useState(false)
+
+  useEffect(() => {
+    const obs = new IntersectionObserver(
+      ([e]) => { if (e.isIntersecting) { setVisible(true); obs.disconnect() } },
+      { threshold: 0.05 }
+    )
+    if (ref.current) obs.observe(ref.current)
+    return () => obs.disconnect()
+  }, [])
 
   return (
-    <section
-      id="experience"
-      className="relative z-10 py-36"
-      style={{ background: 'linear-gradient(180deg, transparent, rgba(10,37,64,0.2), transparent)' }}
-    >
-      <div className="max-w-7xl mx-auto px-6 md:px-12">
-        {/* Header */}
-        <div ref={headRef} className={`${headTransition} ${headReveal} mb-20`}>
-          <p className="font-mono text-[0.7rem] tracking-[0.35em] uppercase text-[--blue-neon] mb-3">
-            // 03
-          </p>
-          <h2
-            className="font-extrabold leading-[0.92] tracking-tight"
-            style={{ fontSize: 'clamp(2.8rem, 5vw, 5rem)' }}
-          >
-            Experi<span className="gradient-text">ência</span>
-          </h2>
-        </div>
+    <section id="experience" className="py-32" style={{ position: "relative", zIndex: 1 }}>
+      <div className="container-editorial">
+        <div className="divider mb-16" />
 
-        {/* Timeline */}
-        <div className="relative pl-8 md:pl-12">
-          {/* Vertical line */}
-          <div className="absolute left-0 top-0 bottom-0 w-px timeline-line" />
+        <div ref={ref} className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-0">
 
-          <div className="space-y-16">
-            {EXPERIENCES.map((exp, i) => (
-              <ExperienceItem key={i} exp={exp} delay={i * 80} />
-            ))}
+          <div className="lg:col-span-3">
+            <p className="label" style={{ color: 'var(--text-muted)', opacity: visible ? 1 : 0, transition: 'opacity 0.8s ease' }}>
+              Experience
+            </p>
+          </div>
+
+          <div className="lg:col-span-9">
+            <h2
+              className="display text-[--text] mb-16"
+              style={{
+                fontSize: 'clamp(2rem, 4vw, 3.5rem)',
+                opacity: visible ? 1 : 0,
+                transform: visible ? 'translateY(0)' : 'translateY(24px)',
+                transition: 'opacity 0.9s ease 0.1s, transform 0.9s cubic-bezier(0.16,1,0.3,1) 0.1s',
+              }}
+            >
+              Onde construí<br />
+              <span className="display-italic" style={{ color: 'var(--accent)' }}>experiência</span>
+            </h2>
+
+            <div>
+              {EXPERIENCES.map((exp, i) => (
+                <ExperienceRow key={i} exp={exp} index={i} visible={visible} />
+              ))}
+            </div>
           </div>
         </div>
       </div>
@@ -42,106 +54,112 @@ export default function Experience() {
   )
 }
 
-function ExperienceItem({ exp, delay }: { exp: any; delay: number }) {
-  const { ref, revealClass, transitionClass } = useReveal(0.08)
-  const [isExpanded, setIsExpanded] = useState(true)
+function ExperienceRow({ exp, index, visible }: { exp: any; index: number; visible: boolean }) {
+  const [open, setOpen] = useState(index < 2)
+  const [hovered, setHovered] = useState(false)
 
   return (
     <div
-      ref={ref}
-      className={`${transitionClass} ${revealClass} relative`}
-      style={{ transitionDelay: `${delay}ms` }}
+      style={{
+        borderTop: '1px solid var(--border)',
+        opacity: visible ? 1 : 0,
+        transform: visible ? 'translateY(0)' : 'translateY(20px)',
+        transition: `opacity 0.8s ease ${0.12 + index * 0.06}s, transform 0.8s cubic-bezier(0.16,1,0.3,1) ${0.12 + index * 0.06}s`,
+      }}
     >
-      {/* Timeline dot */}
-      <div className="absolute -left-[2.15rem] md:-left-[3.15rem] top-1.5">
-        <div
-          className="w-4 h-4 rounded-full border-2 border-[--blue-neon] bg-[--blue-accent] relative"
-          style={{ boxShadow: '0 0 18px rgba(0,198,255,0.6)' }}
-        >
-          {/* Pulse ring */}
-          <span
-            className="absolute inset-[-6px] rounded-full border border-[rgba(0,198,255,0.35)]"
-            style={{ animation: 'float 2.5s ease-in-out infinite' }}
-          />
-        </div>
-      </div>
-
-      {/* Meta row */}
-      <div className="flex flex-wrap items-center gap-3 mb-1.5">
-        <p className="font-mono text-[0.68rem] tracking-[0.2em] uppercase text-[--blue-neon]">
-          {exp.period}
-        </p>
-        {exp.current && (
-          <span
-            className="inline-flex items-center gap-1.5 px-2.5 py-0.5
-              font-mono text-[0.6rem] tracking-[0.2em] uppercase text-[--blue-neon]
-              border border-[rgba(0,198,255,0.4)] bg-[rgba(0,198,255,0.08)]"
-          >
-            <span
-              className="inline-block w-1.5 h-1.5 rounded-full bg-[--blue-neon]"
-              style={{ animation: 'blink 1.2s step-end infinite' }}
-            />
-            Atual
-          </span>
-        )}
-      </div>
-
-      <div className="flex items-start justify-between gap-4 mb-0.5">
-        <div>
-          <h3 className="text-2xl font-bold text-white">{exp.role}</h3>
-          <p className="font-mono text-sm text-[--blue-pale] mb-4">{exp.company}</p>
-        </div>
-        <button
-          onClick={() => setIsExpanded(!isExpanded)}
-          className="group flex items-center gap-2 px-3 py-1.5 font-mono text-[0.65rem] tracking-widest uppercase
-            text-[--blue-neon] border border-[rgba(0,198,255,0.2)] bg-[rgba(0,198,255,0.05)]
-            hover:bg-[rgba(0,198,255,0.1)] hover:border-[rgba(0,198,255,0.4)] transition-all duration-300"
-        >
-          {isExpanded ? 'Recolher' : 'Ver Detalhes'}
-          <svg
-            className={`w-3 h-3 transition-transform duration-300 ${isExpanded ? 'rotate-180' : ''}`}
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-          </svg>
-        </button>
-      </div>
-
-      {/* Stack tags */}
-      <div className="flex flex-wrap gap-1.5 mb-5">
-        {exp.stack.map((s: string) => (
-          <span
-            key={s}
-            className="px-2.5 py-0.5 font-mono text-[0.6rem] tracking-wider uppercase
-              text-[--blue-neon] border border-[rgba(0,198,255,0.2)] bg-[rgba(0,98,255,0.06)]"
-          >
-            {s}
-          </span>
-        ))}
-      </div>
-
-      {/* Content card */}
-      <div
-        className={`overflow-hidden transition-all duration-500 ease-in-out ${
-          isExpanded ? 'max-h-[1000px] opacity-100' : 'max-h-0 opacity-0 pointer-events-none'
-        }`}
+      <button
+        className="w-full text-left py-8 flex justify-between items-start gap-8 cursor-pointer group"
+        onClick={() => setOpen(!open)}
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
+        style={{ background: 'none', border: 'none', padding: '2rem 0' }}
       >
-        <div
-          className="p-6 border-l-[3px] border-[--blue-accent]
-            border-t border-r border-b border-t-[rgba(0,198,255,0.08)]
-            border-r-[rgba(0,198,255,0.08)] border-b-[rgba(0,198,255,0.08)]
-            bg-[rgba(4,20,40,0.65)] backdrop-blur-sm"
+        <div className="flex gap-8 min-w-0">
+          {/* Period */}
+          <div className="flex-shrink-0 w-28 hidden md:block">
+            <span className="mono" style={{ color: 'var(--text-dim)', fontSize: '0.65rem', letterSpacing: '0.1em' }}>
+              {exp.period.split(' — ')[0]}
+            </span>
+            {exp.current && (
+              <div className="flex items-center gap-1.5 mt-1">
+                <span
+                  className="inline-block w-1.5 h-1.5 rounded-full"
+                  style={{ background: 'var(--accent)', animation: 'pulse-accent 2s ease infinite' }}
+                />
+                <span className="mono" style={{ color: 'var(--accent)', fontSize: '0.6rem', letterSpacing: '0.15em' }}>
+                  ATUAL
+                </span>
+              </div>
+            )}
+          </div>
+
+          {/* Role + company */}
+          <div className="min-w-0">
+            <h3
+              className="display mb-1 transition-colors duration-300"
+              style={{
+                fontSize: 'clamp(1.1rem, 2vw, 1.5rem)',
+                color: hovered ? 'var(--accent)' : 'var(--text)',
+              }}
+            >
+              {exp.role}
+            </h3>
+            <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem' }}>
+              {exp.company}
+            </p>
+          </div>
+        </div>
+
+        {/* Toggle icon */}
+        <span
+          className="flex-shrink-0 mono transition-transform duration-300 mt-1"
+          style={{
+            color: 'var(--text-muted)',
+            fontSize: '1.2rem',
+            transform: open ? 'rotate(45deg)' : 'rotate(0deg)',
+          }}
         >
-          <ul className="space-y-3">
+          +
+        </span>
+      </button>
+
+      {/* Expandable content */}
+      <div
+        style={{
+          maxHeight: open ? '600px' : '0',
+          overflow: 'hidden',
+          transition: 'max-height 0.5s cubic-bezier(0.16,1,0.3,1)',
+        }}
+      >
+        <div style={{ paddingBottom: '2rem', paddingLeft: '0' }}>
+          {/* Stack */}
+          <div className="flex flex-wrap gap-2 mb-5">
+            {exp.stack.map((s: string) => (
+              <span
+                key={s}
+                className="mono px-3 py-1"
+                style={{
+                  border: '1px solid var(--border-md)',
+                  color: 'var(--text-muted)',
+                  fontSize: '0.65rem',
+                  letterSpacing: '0.1em',
+                }}
+              >
+                {s}
+              </span>
+            ))}
+          </div>
+
+          {/* Bullets */}
+          <ul className="space-y-3" style={{ listStyle: 'none', padding: 0, margin: 0 }}>
             {exp.bullets.map((b: string, j: number) => (
               <li
                 key={j}
-                className="flex gap-4 text-[0.92rem] text-[rgba(240,248,255,0.65)] leading-relaxed"
+                className="flex gap-4"
+                style={{ color: 'var(--text-muted)', fontSize: '0.9rem', lineHeight: 1.65 }}
               >
-                <span className="font-mono text-[--blue-neon] flex-shrink-0 mt-0.5">→</span>
-                <span>{b}</span>
+                <span style={{ color: 'var(--accent)', flexShrink: 0, fontFamily: 'JetBrains Mono, monospace' }}>—</span>
+                {b}
               </li>
             ))}
           </ul>

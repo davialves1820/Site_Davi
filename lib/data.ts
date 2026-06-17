@@ -8,12 +8,12 @@ export const PERSONAL = {
   location: 'João Pessoa, Paraíba 🇧🇷',
   email: 'davialvesr18@gmail.com',
   github: 'https://github.com/davialves1820',
-  linkedin: 'https://www.linkedin.com/in/davi-rodrigues1820/',
+  linkedin: 'https://www.linkedin.com/in/davi-rodrigues-36750b2a5',
   resume: '/Davi_Alves_CV.pdf',
   bio: [
     'Desenvolvedor Full Stack de 20 anos, católico apostólico romano e graduando em Ciência da Computação na UFPB desde 2023. Busco o desenvolvimento integral através do equilíbrio entre a fé, o intelecto e a saúde, integrando a disciplina dos esportes e a criatividade dos animes à minha rotina.',
-    'Apaixonado por criar soluções que impactam a vida real, atuo simultaneamente em pesquisa, liderança e desenvolvimento de produtos. Fundei e lidero a Connecta CI, grupo de tecnologia da UFPB, e sou desenvolvedor no laboratório LAVID. Acredito que o melhor código é aquele que resolve problemas reais para pessoas reais.',
-    'Minhas áreas de interesse concentram-se no desenvolvimento web, na inteligência artificial e na programação competitiva. Busco aplicar o raciocínio lógico e a eficiência algorítmica para construir sistemas inteligentes, escaláveis e que resolvam desafios complexos de forma otimizada.',
+    'Apaixonado por criar soluções que impactam a vida real, atuo simultaneamente em pesquisa, liderança e desenvolvimento de produtos. Co-fundei e lidero a Connecta CI, grupo de tecnologia da UFPB, e atuo como desenvolvedor no laboratório LAVID e na CODATA, a Companhia de Processamento de Dados da Paraíba.',
+    'Minhas áreas de interesse concentram-se no desenvolvimento web, observabilidade de sistemas, DevOps e programação competitiva. Conquistei o 3º lugar na OPI 2025 e aplico raciocínio lógico e eficiência algorítmica para construir sistemas escaláveis e inteligentes.',
   ],
 }
 
@@ -26,7 +26,7 @@ export const SKILLS = [
   {
     icon: '🔧',
     title: 'Backend',
-    tags: ['Node.js', 'Python', 'FastAPI', 'Express.js', 'Django', 'APIs REST', 'C / C++', 'Java'],
+    tags: ['Python', 'Node.js', 'NestJS', 'Django', 'Express.js', 'APIs REST', 'C / C++', 'Java'],
   },
   {
     icon: '🗄️',
@@ -36,7 +36,7 @@ export const SKILLS = [
   {
     icon: '🚀',
     title: 'DevOps & Infra',
-    tags: ['Docker', 'Git / GitHub', 'Grafana', 'Linux'],
+    tags: ['Docker', 'Linux', 'Git / GitHub', 'GitHub Actions', 'Grafana', 'CI/CD'],
   },
   {
     icon: '📡',
@@ -45,8 +45,8 @@ export const SKILLS = [
   },
   {
     icon: '🤖',
-    title: 'IA & Automação',
-    tags: ['Chatbots', 'Machine Learning', 'Automação de Processos'],
+    title: 'Eng. de Software',
+    tags: ['Clean Code', 'SOLID', 'Design Patterns', 'Microserviços', 'TDD', 'Jest', 'Postman', 'Scrum', 'Kanban'],
   },
 ]
 
@@ -61,80 +61,94 @@ export interface Experience {
 
 export const EXPERIENCES: Experience[] = [
   {
-    period: 'Fevereiro 2026 — Presente',
+    period: 'Mai/2026 — Presente',
+    current: true,
+    role: 'Estagiário Full Stack',
+    company: 'CODATA — Companhia de Processamento de Dados da Paraíba',
+    stack: ['Python', 'Grafana', 'Docker', 'Git'],
+    bullets: [
+      'Desenvolvimento Full Stack em Python com foco em análise de performance de sistemas governamentais do estado da Paraíba.',
+      'Implementação de pipelines de coleta, processamento e visualização de métricas de desempenho em produção.',
+      'Aplicação de boas práticas de Engenharia de Software: versionamento semântico, revisão de código e documentação técnica.',
+      'Integração de ferramentas de monitoramento e geração de relatórios automatizados para a administração pública estadual.',
+      'Colaboração em soluções para modernização de sistemas da administração pública estadual da Paraíba.',
+    ],
+  },
+  {
+    period: 'Mai/2026 — Presente',
     current: true,
     role: 'Desenvolvedor Full Stack',
     company: 'Laboratório LAVID · UFPB',
-    stack: ['React', 'Node.js', 'Grafana', 'Docker'],
+    stack: ['Python', 'React', 'Docker', 'Grafana'],
     bullets: [
-      'Desenvolvimento e manutenção de aplicações web de alta disponibilidade utilizando React no frontend e Node.js no backend, com foco em escalabilidade e código limpo.',
-      'Participação ativa no ciclo completo de desenvolvimento: levantamento de requisitos, arquitetura de APIs RESTful, implementação, testes e deploy em ambiente contêinerizado com Docker.',
-      'Monitoramento contínuo de aplicações em produção com Grafana: criação de dashboards, alertas proativos e análise de métricas de performance para garantir SLA.',
-      'Colaboração com equipe multidisciplinar seguindo práticas ágeis — code reviews, pair programming e organização de entregas com Git/GitHub.',
+      'Desenvolvimento Full Stack em Python com foco em análise de performance de sistemas governamentais.',
+      'Implementação de pipelines de coleta, processamento e visualização de métricas de desempenho.',
+      'Aplicação de boas práticas de Engenharia de Software: versionamento semântico, revisão de código e documentação técnica.',
+      'Integração de ferramentas de monitoramento e geração de relatórios automatizados.',
+      'Colaboração em soluções para modernização de sistemas da administração pública estadual.',
     ],
   },
   {
-    period: 'Agosto 2025 — Presente',
+    period: 'Ago/2025 — Presente',
     current: true,
     role: 'Fundador & Vice-Presidente',
     company: 'Connecta CI · UFPB',
-    stack: ['Gestão', 'React', 'Node.js', 'Liderança'],
+    stack: ['Gestão', 'React', 'Node.js', 'Scrum', 'Liderança'],
     bullets: [
-      'Fundação e estruturação completa da empresa júnior de tecnologia da UFPB — da definição do modelo de negócio à formação da equipe inicial de desenvolvedores.',
-      'Coordenação de múltiplos projetos simultâneos com clientes reais: planejamento de sprints, alocação de equipe, controle de qualidade e apresentação de resultados.',
-      'Desenvolvimento de uma cultura de aprendizado contínuo, organizando workshops, hackathons internos e mentorias técnicas para membros juniores.',
-      'Criação de processos e documentação técnica que aumentaram a produtividade da equipe e reduziram o tempo de onboarding de novos membros.',
+      'Co-fundação e estruturação completa da Connecta CI, grupo de tecnologia da UFPB — da definição do modelo até a formação da equipe inicial.',
+      'Adoção de metodologias ágeis (Scrum/Kanban) para coordenação de projetos e equipes multidisciplinares.',
+      'Definição de processos internos de desenvolvimento, revisão de código e entrega de software com qualidade.',
+      'Facilitação da comunicação entre membros, parceiros e instituições; gestão de stakeholders e planejamento estratégico.',
     ],
   },
   {
-    period: 'Novembro 2024 — Presente',
+    period: 'Nov/2024 — Presente',
     current: true,
     role: 'Bolsista',
     company: 'PET Computação · UFPB',
-    stack: ['Web Dev', 'Marketing Digital', 'Liderança'],
+    stack: ['Web Dev', 'Marketing Digital', 'Liderança', 'Podcast'],
     bullets: [
-      'Liderança do núcleo de marketing e mídias digitais: criação de estratégia de conteúdo, gestão de redes sociais e aumento expressivo do engajamento da comunidade.',
-      'Organização e moderação de eventos técnicos, seminários e reuniões do grupo de estudos em Computação da UFPB.',
-      'Desenvolvimento e manutenção de projetos web internos do PET, aplicando boas práticas de versionamento e colaboração em equipe.',
+      'Coordenador da área de mídias e responsável pelo podcast "Além do Ponto e Vírgula", voltado à comunidade de computação da UFPB.',
+      'Liderança da equipe de marketing; organização e condução de reuniões com atas e planejamento estratégico.',
+      'Atuação nos três pilares universitários: ensino, pesquisa e extensão comunitária.',
     ],
   },
   {
-    period: 'Novembro 2025 — Março 2026',
+    period: 'Nov/2025 — Mar/2026',
     current: false,
-    role: 'Desenvolvedor Full Stack',
+    role: 'Desenvolvedor Frontend',
     company: 'Aquário · UFPB',
-    stack: ['React', 'Next.js', 'Git', 'UX'],
+    stack: ['React', 'Next.js', 'Git', 'GitHub Actions', 'UX'],
     bullets: [
-      'Desenvolvimento da plataforma central do Centro de Informática da UFPB com React e Next.js, servindo como ponto único de acesso para alunos, professores e servidores.',
-      'Otimização da experiência do usuário (UX): redesign de fluxos críticos, redução de cliques em tarefas frequentes e melhoria na responsividade em dispositivos móveis.',
-      'Colaboração em projeto open source com fluxo profissional de desenvolvimento: pull requests, code reviews e integração contínua via GitHub Actions.',
-      'Aplicação de Server-Side Rendering (SSR) e Static Generation do Next.js para otimizar performance e SEO da plataforma.',
+      'Desenvolvimento da plataforma central de informações e oportunidades do Centro de Informática da UFPB, servindo centenas de estudantes.',
+      'Otimização de UX, facilitando o acesso a murais de laboratórios, vagas e eventos do CI/UFPB.',
+      'Contribuição em projeto open source com boas práticas de desenvolvimento web e colaboração via Git/GitHub.',
+      'Implementação de pipelines de revisão de código e controle de qualidade no repositório colaborativo com GitHub Actions.',
     ],
   },
   {
-    period: 'Agosto 2025 — Março 2026',
+    period: 'Ago/2025 — Mar/2026',
     current: false,
     role: 'Desenvolvedor Full Stack',
     company: 'Buszer · UFPB',
     stack: ['React', 'Node.js', 'MQTT', 'LoRa', 'IoT', 'Mapas'],
     bullets: [
-      'Arquitetura e desenvolvimento completo de aplicação full stack para rastreamento em tempo real do ônibus circular da UFPB, impactando diretamente o deslocamento de milhares de alunos diariamente.',
-      'Integração de dispositivos IoT com protocolo MQTT e tecnologia LoRa: ingestão, tratamento e persistência de dados de geolocalização em pipeline de dados de baixa latência.',
-      'Construção de mapas interativos dinâmicos com atualização em tempo real da posição do veículo, estimativa de chegada e histórico de trajetos.',
-      'Design e implementação de API backend robusta com Node.js, gerenciando streams de dados GPS, autenticação e notificações push para usuários.',
-      'Interfaces responsivas e acessíveis com foco total na experiência do usuário — especialmente em conexões móveis instáveis no campus.',
+      'Arquitetura e desenvolvimento completo de aplicação full stack para rastreamento em tempo real do ônibus circular da UFPB.',
+      'Integração IoT: comunicação entre broker MQTT e front-end via protocolo LoRa para transmissão de dados de geolocalização.',
+      'Implementação de interfaces responsivas e mapas interativos com foco em experiência do usuário em tempo real.',
+      'Condução de reuniões de sprint com pautas, atas e planejamento de entregas em ciclos ágeis.',
     ],
   },
   {
-    period: 'Setembro 2024 — Novembro 2025',
+    period: 'Set/2024 — Nov/2025',
     current: false,
     role: 'Educador em Automação e IA',
-    company: 'JPTECH · UFPB',
-    stack: ['Python', 'IA', 'Automação', 'Didática'],
+    company: 'JPTech · UFPB',
+    stack: ['Python', 'IA', 'Make (no-code)', 'Didática'],
     bullets: [
-      'Planejamento e ministração de aulas sobre automação de processos e conceitos fundamentais de inteligência artificial para estudantes de tecnologia da UFPB.',
-      'Criação de material didático, exercícios práticos e projetos hands-on que tornaram conceitos complexos de IA acessíveis para iniciantes.',
-      'Desenvolvimento de chatbots e scripts de automação como projetos de aula, demonstrando aplicações reais das tecnologias ensinadas.',
+      'Planejamento e ministração de aulas de automação e inteligência artificial para iniciantes sem experiência em programação.',
+      'Capacitação na plataforma no-code Make com foco em otimização de processos corporativos e pessoais.',
+      'Elaboração de material didático acessível, exercícios práticos e projetos hands-on sobre IA aplicada.',
     ],
   },
 ]
@@ -145,7 +159,7 @@ export const PROJECTS = [
     desc: 'Plataforma religiosa completa com Bíblia Sagrada, Liturgia Diária, Calendário Litúrgico, Orações, Santos do Dia e Notícias do Vaticano — feita para católicos que buscam aprofundar a fé no dia a dia.',
     stack: ['Next.js', 'TypeScript', 'Tailwind', 'APIs'],
     url: 'https://central-catolica.vercel.app/',
-    live: true, // tem demo ao vivo
+    live: true,
   },
   {
     name: 'Algoritmos de Otimização (TSP)',
@@ -157,7 +171,7 @@ export const PROJECTS = [
   {
     name: 'Backend Node',
     desc: 'API RESTful modular em Node.js com autenticação JWT, CRUD completo, validações e documentação. Base de referência para projetos full stack.',
-    stack: ['Node.js', 'JavaScript', 'REST'],
+    stack: ['Node.js', 'JavaScript', 'REST', 'JWT'],
     url: 'https://github.com/davialves1820/BackendNode',
     live: false,
   },
@@ -195,11 +209,10 @@ export const AWARDS = [
   {
     medal: '🥉',
     title: '3° Lugar — OPI 2025',
-    desc: 'Olimpíada Paraibana de Informática — competição estadual de programação, 2025.',
-  }
+    desc: 'Olimpíada Paraibana de Informática — competição estadual de programação competitiva, 2025.',
+  },
 ]
 
-// ── Interesses Pessoais ───────────────────────────────────
 export const ANIMES = [
   {
     title: 'Steins;Gate',
@@ -232,6 +245,14 @@ export const FAITH_QUOTE = {
 export const CURRENT_VIBE = {
   reading: 'Suma Teológica — São Tomás de Aquino',
   grinding: 'LeetCode · Grafos & DP',
-  building: 'Central Católica + LAVID',
+  building: 'Central Católica + LAVID + CODATA',
   sport: 'Musculação 🏋️',
 }
+
+// Stats for the hero section
+export const STATS = [
+  { value: '7+', label: 'Projetos Reais' },
+  { value: '2+', label: 'Anos Dev' },
+  { value: '3°', label: 'OPI 2025' },
+  { value: '5+', label: 'Linguagens' },
+]

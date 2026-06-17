@@ -1,26 +1,34 @@
 import type { Metadata } from 'next'
-import { Space_Mono, Syne } from 'next/font/google'
+import { Playfair_Display, Inter, JetBrains_Mono } from 'next/font/google'
 import './globals.css'
 
-const syne = Syne({
+const playfair = Playfair_Display({
   subsets: ['latin'],
-  weight: ['400', '600', '700', '800'],
-  variable: '--font-syne',
+  weight: ['400', '700', '900'],
+  style: ['normal', 'italic'],
+  variable: '--font-playfair',
   display: 'swap',
 })
 
-const spaceMono = Space_Mono({
+const inter = Inter({
   subsets: ['latin'],
-  weight: ['400', '700'],
-  variable: '--font-space-mono',
+  weight: ['300', '400', '500', '600'],
+  variable: '--font-inter',
+  display: 'swap',
+})
+
+const jetbrains = JetBrains_Mono({
+  subsets: ['latin'],
+  weight: ['400', '500'],
+  variable: '--font-jetbrains',
   display: 'swap',
 })
 
 export const metadata: Metadata = {
   title: 'Davi Alves — Full Stack Developer',
   description:
-    'Portfólio de Davi Alves Rodrigues, Desenvolvedor Full Stack especializado em React, Next.js, Node.js e IoT. Estudante de Ciência da Computação na UFPB.',
-  keywords: ['Full Stack', 'React', 'Next.js', 'Node.js', 'UFPB', 'João Pessoa', 'Paraíba'],
+    'Portfólio de Davi Alves Rodrigues, Desenvolvedor Full Stack. CODATA · LAVID · UFPB.',
+  keywords: ['Full Stack', 'React', 'Next.js', 'Python', 'UFPB', 'João Pessoa'],
   authors: [{ name: 'Davi Alves Rodrigues' }],
   openGraph: {
     title: 'Davi Alves — Full Stack Developer',
@@ -31,8 +39,11 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="pt-BR" className={`${syne.variable} ${spaceMono.variable}`}>
-      <body className="bg-blue-deep text-white antialiased overflow-x-hidden font-sans">
+    <html
+      lang="pt-BR"
+      className={`${playfair.variable} ${inter.variable} ${jetbrains.variable}`}
+    >
+      <body className="bg-[--bg] text-[--text] antialiased overflow-x-hidden">
         {children}
       </body>
     </html>

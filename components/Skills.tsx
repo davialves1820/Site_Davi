@@ -1,88 +1,100 @@
 'use client'
-import { useReveal } from '@/lib/hooks'
+import { useEffect, useRef, useState } from 'react'
 import { SKILLS } from '@/lib/data'
 
 export default function Skills() {
-  const { ref: headRef, revealClass: headReveal, transitionClass: headTransition } = useReveal()
+  const ref = useRef<HTMLDivElement>(null)
+  const [visible, setVisible] = useState(false)
+
+  useEffect(() => {
+    const obs = new IntersectionObserver(
+      ([e]) => { if (e.isIntersecting) { setVisible(true); obs.disconnect() } },
+      { threshold: 0.05 }
+    )
+    if (ref.current) obs.observe(ref.current)
+    return () => obs.disconnect()
+  }, [])
 
   return (
-    <section id="skills" className="relative z-10 py-36">
-      {/* Subtle horizontal line decoration */}
-      <div
-        className="absolute top-0 left-0 right-0 h-px opacity-20"
-        style={{ background: 'linear-gradient(90deg, transparent, var(--blue-accent), var(--blue-neon), transparent)' }}
-      />
+    <section id="skills" className="py-32" style={{ position: "relative", zIndex: 1 }}>
+      <div className="container-editorial">
+        <div className="divider mb-16" />
 
-      <div className="max-w-7xl mx-auto px-6 md:px-12">
-        {/* Header */}
-        <div ref={headRef} className={`${headTransition} ${headReveal} text-center mb-20`}>
-          <p className="font-mono text-[0.7rem] tracking-[0.35em] uppercase text-[--blue-neon] mb-3">
-            // 02
-          </p>
-          <h2
-            className="font-extrabold leading-[0.92] tracking-tight"
-            style={{ fontSize: 'clamp(2.8rem, 5vw, 5rem)' }}
-          >
-            Tech <span className="gradient-text">Stack</span>
-          </h2>
-        </div>
+        <div ref={ref} className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-0">
 
-        {/* Cards grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-          {SKILLS.map((skill, i) => (
-            <SkillCard key={skill.title} skill={skill} delay={i * 60} />
-          ))}
+          {/* Label */}
+          <div className="lg:col-span-3">
+            <p className="label" style={{ color: 'var(--text-muted)', opacity: visible ? 1 : 0, transition: 'opacity 0.8s ease' }}>
+              Stack
+            </p>
+          </div>
+
+          {/* Content */}
+          <div className="lg:col-span-9">
+            <h2
+              className="display text-[--text] mb-16"
+              style={{
+                fontSize: 'clamp(2rem, 4vw, 3.5rem)',
+                opacity: visible ? 1 : 0,
+                transform: visible ? 'translateY(0)' : 'translateY(24px)',
+                transition: 'opacity 0.9s ease 0.1s, transform 0.9s cubic-bezier(0.16,1,0.3,1) 0.1s',
+              }}
+            >
+              Tecnologias que uso<br />
+              <span className="display-italic" style={{ color: 'var(--accent)' }}>no dia a dia</span>
+            </h2>
+
+            {/* Skills as tag cloud rows per category */}
+            <div className="space-y-10">
+              {SKILLS.map((skill, i) => (
+                <div
+                  key={skill.title}
+                  className="grid grid-cols-12 gap-4 items-start"
+                  style={{
+                    opacity: visible ? 1 : 0,
+                    transform: visible ? 'translateY(0)' : 'translateY(16px)',
+                    transition: `opacity 0.8s ease ${0.15 + i * 0.07}s, transform 0.8s cubic-bezier(0.16,1,0.3,1) ${0.15 + i * 0.07}s`,
+                  }}
+                >
+                  {/* Category label */}
+                  <div className="col-span-12 md:col-span-3 flex items-center gap-3 pt-1">
+                    <span style={{ fontSize: '1.1rem' }}>{skill.icon}</span>
+                    <span className="label" style={{ color: 'var(--text-muted)' }}>{skill.title}</span>
+                  </div>
+
+                  {/* Tags */}
+                  <div className="col-span-12 md:col-span-9 flex flex-wrap gap-2">
+                    {skill.tags.map((tag: string) => (
+                      <SkillTag key={tag} tag={tag} />
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </section>
   )
 }
 
-function SkillCard({ skill, delay }: { skill: any; delay: number }) {
-  const { ref, revealClass, transitionClass } = useReveal(0.08)
-  const { icon, title, tags } = skill
-
+function SkillTag({ tag }: { tag: string }) {
+  const [hovered, setHovered] = useState(false)
   return (
-    <div
-      ref={ref}
-      className={`${transitionClass} ${revealClass} card-glow group relative p-8
-        border border-[rgba(0,198,255,0.1)]
-        bg-[rgba(4,20,40,0.55)] backdrop-blur-sm overflow-hidden`}
-      style={{ transitionDelay: `${delay}ms` }}
+    <span
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      className="mono text-xs px-4 py-2 transition-all duration-300 cursor-default"
+      style={{
+        border: '1px solid',
+        borderColor: hovered ? 'var(--accent)' : 'var(--border-md)',
+        color: hovered ? 'var(--accent)' : 'var(--text-muted)',
+        background: hovered ? 'var(--accent-dim)' : 'transparent',
+        fontSize: '0.72rem',
+        letterSpacing: '0.08em',
+      }}
     >
-      {/* Hover gradient */}
-      <div
-        className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-        style={{ background: 'linear-gradient(135deg, rgba(0,98,255,0.06), transparent)' }}
-      />
-
-      {/* Top-right corner decoration */}
-      <div
-        className="absolute top-0 right-0 w-24 h-24 opacity-0 group-hover:opacity-10
-          transition-opacity duration-500"
-        style={{ background: 'radial-gradient(circle at top right, var(--blue-neon), transparent)' }}
-      />
-
-      <span className="text-3xl block mb-4">{icon}</span>
-      <p className="font-mono text-[0.67rem] tracking-[0.3em] uppercase text-[--blue-neon] mb-5">
-        {title}
-      </p>
-
-      <div className="flex flex-wrap gap-2">
-        {tags.map((tag: string) => (
-          <span
-            key={tag}
-            className="px-3 py-1.5 font-mono text-[0.68rem] tracking-wide
-              text-[--blue-pale] border border-[rgba(0,198,255,0.15)]
-              bg-[rgba(0,98,255,0.07)]
-              hover:text-[--blue-neon] hover:border-[--blue-neon]
-              hover:-translate-y-0.5
-              transition-all duration-200"
-          >
-            {tag}
-          </span>
-        ))}
-      </div>
-    </div>
+      {tag}
+    </span>
   )
 }

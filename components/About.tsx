@@ -1,70 +1,76 @@
 'use client'
-import { useReveal } from '@/lib/hooks'
-import { PERSONAL } from '@/lib/data'
+import { useEffect, useRef, useState } from 'react'
+import { PERSONAL, CURRENT_VIBE, STATS } from '@/lib/data'
 
 export default function About() {
-  const { ref: leftRef, revealClass: leftReveal, transitionClass: leftTransition } = useReveal()
-  const { ref: rightRef, revealClass: rightReveal, transitionClass: rightTransition } = useReveal(0.2)
+  const ref = useRef<HTMLDivElement>(null)
+  const [visible, setVisible] = useState(false)
+
+  useEffect(() => {
+    const obs = new IntersectionObserver(
+      ([e]) => { if (e.isIntersecting) { setVisible(true); obs.disconnect() } },
+      { threshold: 0.1 }
+    )
+    if (ref.current) obs.observe(ref.current)
+    return () => obs.disconnect()
+  }, [])
 
   return (
-    <section id="about" className="relative z-10 py-36">
-      <div className="max-w-7xl mx-auto px-6 md:px-12">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
+    <section id="about" className="py-32" style={{ position: "relative", zIndex: 1 }}>
+      <div className="container-editorial">
+        <div className="divider mb-16" />
 
-          {/* ── Left ─────────────────────────────────────────── */}
-          <div ref={leftRef} className={`${leftTransition} ${leftReveal}`}>
-            <p className="font-mono text-[0.7rem] tracking-[0.35em] uppercase text-[--blue-neon] mb-3">
-              // 01
-            </p>
-            <h2
-              className="font-extrabold leading-[0.92] tracking-tight mb-8"
-              style={{ fontSize: 'clamp(2.8rem, 5vw, 5rem)' }}
+        <div ref={ref} className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-0">
+
+          {/* Label col */}
+          <div className="lg:col-span-3">
+            <p
+              className="label"
+              style={{
+                color: 'var(--text-muted)',
+                opacity: visible ? 1 : 0,
+                transition: 'opacity 0.8s ease',
+              }}
             >
-              Sobre <span className="gradient-text">Mim</span>
+              About
+            </p>
+          </div>
+
+          {/* Content col */}
+          <div className="lg:col-span-9">
+
+            {/* Big statement */}
+            <h2
+              className="display text-[--text] mb-12"
+              style={{
+                fontSize: 'clamp(2rem, 4vw, 3.5rem)',
+                opacity: visible ? 1 : 0,
+                transform: visible ? 'translateY(0)' : 'translateY(24px)',
+                transition: 'opacity 0.9s ease 0.1s, transform 0.9s cubic-bezier(0.16,1,0.3,1) 0.1s',
+              }}
+            >
+              Desenvolvedor Full Stack de João Pessoa,<br />
+              construindo sistemas que{' '}
+              <span className="display-italic" style={{ color: 'var(--accent)' }}>
+                importam
+              </span>{' '}
+              de verdade.
             </h2>
-            <div className="space-y-4 mb-10">
+
+            {/* Bio paragraphs */}
+            <div
+              className="space-y-5 mb-16"
+              style={{
+                opacity: visible ? 1 : 0,
+                transform: visible ? 'translateY(0)' : 'translateY(20px)',
+                transition: 'opacity 0.9s ease 0.25s, transform 0.9s cubic-bezier(0.16,1,0.3,1) 0.25s',
+              }}
+            >
               {PERSONAL.bio.map((p, i) => (
-                <p key={i} className="text-[rgba(240,248,255,0.65)] leading-relaxed text-[0.95rem]">
+                <p key={i} style={{ color: 'var(--text-muted)', lineHeight: 1.75, fontSize: '1rem' }}>
                   {p}
                 </p>
               ))}
-            </div>
-          </div>
-
-          {/* ── Right: Photo Space ──────────────────────────────────── */}
-          <div ref={rightRef} className={`${rightTransition} ${rightReveal} relative group`}>
-            <div className="relative w-full aspect-square max-w-[440px] mx-auto">
-              {/* Decorative background glow */}
-              <div
-                className="absolute inset-x-[-20px] inset-y-[-20px] opacity-20 blur-[60px] rounded-full pointer-events-none"
-                style={{ background: 'radial-gradient(circle, var(--blue-neon), var(--blue-accent))' }}
-              />
-
-              {/* Main image container */}
-              <div className="relative h-full w-full overflow-hidden border border-[rgba(0,198,255,0.2)] bg-[rgba(4,20,40,0.4)]
-                group-hover:border-[--blue-neon] transition-colors duration-500">
-                
-                {/* 
-                  Note to User: 
-                  Place your image here. 
-                  Update the 'src' attribute below with your photo path.
-                */}
-                <img
-                  src="/Davi.jpeg" 
-                  alt={PERSONAL.name}
-                  className="w-full h-full object-cover transition-all duration-700 group-hover:scale-105"
-                />
-
-                {/* Corner Accents */}
-                <span className="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 border-[--blue-neon] opacity-40" />
-                <span className="absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 border-[--blue-neon] opacity-40" />
-              </div>
-
-              {/* Tag overlay */}
-              <div className="absolute -bottom-6 -right-6 px-6 py-3 bg-[--blue-accent] border border-[--blue-neon]
-                font-mono text-[0.65rem] tracking-[0.2em] uppercase text-white shadow-[0_10px_30px_rgba(0,98,255,0.3)]">
-                {PERSONAL.role}
-              </div>
             </div>
           </div>
         </div>

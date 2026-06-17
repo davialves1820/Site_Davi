@@ -2,7 +2,7 @@
 import { useEffect, useRef } from 'react'
 
 export default function Cursor() {
-  const dotRef  = useRef<HTMLDivElement>(null)
+  const dotRef = useRef<HTMLDivElement>(null)
   const ringRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -10,36 +10,40 @@ export default function Cursor() {
     let raf: number
 
     const onMove = (e: MouseEvent) => {
-      mx = e.clientX
-      my = e.clientY
+      mx = e.clientX; my = e.clientY
       if (dotRef.current) {
         dotRef.current.style.left = mx + 'px'
-        dotRef.current.style.top  = my + 'px'
+        dotRef.current.style.top = my + 'px'
       }
     }
 
     const lerp = () => {
-      rx += (mx - rx) * 0.13
-      ry += (my - ry) * 0.13
+      rx += (mx - rx) * 0.1
+      ry += (my - ry) * 0.1
       if (ringRef.current) {
         ringRef.current.style.left = rx + 'px'
-        ringRef.current.style.top  = ry + 'px'
+        ringRef.current.style.top = ry + 'px'
       }
       raf = requestAnimationFrame(lerp)
     }
 
-    const onEnter = () => {
-      dotRef.current?.classList.add('hover')
+    const onEnter = (e: Event) => {
+      const el = e.currentTarget as HTMLElement
+      const isLink = el.tagName === 'A' || el.tagName === 'BUTTON'
+      dotRef.current?.classList.toggle('link', isLink)
+      dotRef.current?.classList.toggle('hover', !isLink)
       ringRef.current?.classList.add('hover')
     }
     const onLeave = () => {
-      dotRef.current?.classList.remove('hover')
+      dotRef.current?.classList.remove('hover', 'link')
       ringRef.current?.classList.remove('hover')
     }
 
     document.addEventListener('mousemove', onMove)
-    document.querySelectorAll('a, button, [data-cursor]')
-      .forEach(el => { el.addEventListener('mouseenter', onEnter); el.addEventListener('mouseleave', onLeave) })
+    document.querySelectorAll('a, button, [data-cursor]').forEach(el => {
+      el.addEventListener('mouseenter', onEnter)
+      el.addEventListener('mouseleave', onLeave)
+    })
 
     raf = requestAnimationFrame(lerp)
     return () => {
@@ -50,7 +54,7 @@ export default function Cursor() {
 
   return (
     <>
-      <div ref={dotRef}  className="cursor-dot" />
+      <div ref={dotRef} className="cursor-dot" />
       <div ref={ringRef} className="cursor-ring" />
     </>
   )
