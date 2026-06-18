@@ -73,9 +73,6 @@ export default function Hero() {
           <p className="label mb-2">{PERSONAL.role}</p>
           <p className="label" style={{ color: 'var(--text-dim)' }}>João Pessoa, Paraíba · UFPB</p>
         </div>
-        <div>
-          <p className="label" style={{ color: 'var(--text-dim)' }}>Scroll ↓</p>
-        </div>
       </div>
 
       <div
