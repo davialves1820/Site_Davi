@@ -49,7 +49,7 @@ export default function About() {
                 transition: 'opacity 0.9s ease 0.1s, transform 0.9s cubic-bezier(0.16,1,0.3,1) 0.1s',
               }}
             >
-              Desenvolvedor Full Stack de João Pessoa,<br />
+              Desenvolvedor Full Stack,<br />
               construindo sistemas que{' '}
               <span className="display-italic" style={{ color: 'var(--accent)' }}>
                 importam
