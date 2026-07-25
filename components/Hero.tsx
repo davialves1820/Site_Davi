@@ -36,12 +36,22 @@ export default function Hero() {
             lineHeight: 0.86,
             paddingLeft: 'clamp(1.5rem, 5vw, 5rem)',
             color: 'var(--text)',
-            transform: `translateY(${parallaxUp}px)`,
-            opacity: visible ? 1 : 0,
-            transition: 'opacity 1.1s ease 0.05s',
           }}
         >
-          Davi
+          {/* parallax layer — instant, scroll-driven, no transition */}
+          <div style={{ transform: `translateY(${parallaxUp}px)` }}>
+            {/* reveal layer — transitions once on mount */}
+            <span
+              style={{
+                display: 'inline-block',
+                transform: visible ? 'translateY(0)' : 'translateY(100px)',
+                opacity: visible ? 1 : 0,
+                transition: 'transform 1.2s cubic-bezier(0.16,1,0.3,1) 0.05s, opacity 1s ease 0.05s',
+              }}
+            >
+              Davi
+            </span>
+          </div>
         </div>
 
         <div
@@ -51,12 +61,20 @@ export default function Hero() {
             lineHeight: 0.86,
             paddingLeft: 'clamp(1.5rem, 5vw, 5rem)',
             color: 'var(--accent)',
-            transform: `translateY(${parallaxDown}px)`,
-            opacity: visible ? 1 : 0,
-            transition: 'opacity 1.1s ease 0.25s',
           }}
         >
-          Alves
+          <div style={{ transform: `translateY(${parallaxDown}px)` }}>
+            <span
+              style={{
+                display: 'inline-block',
+                transform: visible ? 'translateY(0)' : 'translateY(100px)',
+                opacity: visible ? 1 : 0,
+                transition: 'transform 1.2s cubic-bezier(0.16,1,0.3,1) 0.22s, opacity 1s ease 0.22s',
+              }}
+            >
+              Alves
+            </span>
+          </div>
         </div>
       </div>
 

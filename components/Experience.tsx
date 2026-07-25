@@ -1,6 +1,7 @@
 'use client'
 import { useEffect, useRef, useState } from 'react'
 import { EXPERIENCES } from '@/lib/data'
+import RevealLine from '@/components/RevealLine'
 
 export default function Experience() {
   const ref = useRef<HTMLDivElement>(null)
@@ -31,15 +32,12 @@ export default function Experience() {
           <div className="lg:col-span-9">
             <h2
               className="display text-[--text] mb-16"
-              style={{
-                fontSize: 'clamp(2rem, 4vw, 3.5rem)',
-                opacity: visible ? 1 : 0,
-                transform: visible ? 'translateY(0)' : 'translateY(24px)',
-                transition: 'opacity 0.9s ease 0.1s, transform 0.9s cubic-bezier(0.16,1,0.3,1) 0.1s',
-              }}
+              style={{ fontSize: 'clamp(2rem, 4vw, 3.5rem)' }}
             >
-              Onde construí<br />
-              <span className="display-italic" style={{ color: 'var(--accent)' }}>experiência</span>
+              <RevealLine>Onde construí</RevealLine>
+              <RevealLine delay={0.12}>
+                <span className="display-italic" style={{ color: 'var(--accent)' }}>experiência</span>
+              </RevealLine>
             </h2>
 
             <div>

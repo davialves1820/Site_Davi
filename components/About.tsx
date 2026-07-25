@@ -1,6 +1,7 @@
 'use client'
 import { useEffect, useRef, useState } from 'react'
 import { PERSONAL, CURRENT_VIBE, STATS } from '@/lib/data'
+import RevealLine from '@/components/RevealLine'
 
 export default function About() {
   const ref = useRef<HTMLDivElement>(null)
@@ -42,19 +43,16 @@ export default function About() {
             {/* Big statement */}
             <h2
               className="display text-[--text] mb-12"
-              style={{
-                fontSize: 'clamp(2rem, 4vw, 3.5rem)',
-                opacity: visible ? 1 : 0,
-                transform: visible ? 'translateY(0)' : 'translateY(24px)',
-                transition: 'opacity 0.9s ease 0.1s, transform 0.9s cubic-bezier(0.16,1,0.3,1) 0.1s',
-              }}
+              style={{ fontSize: 'clamp(2rem, 4vw, 3.5rem)' }}
             >
-              Desenvolvedor Full Stack,<br />
-              construindo sistemas que{' '}
-              <span className="display-italic" style={{ color: 'var(--accent)' }}>
-                importam
-              </span>{' '}
-              de verdade.
+              <RevealLine>Desenvolvedor Full Stack,</RevealLine>
+              <RevealLine delay={0.12}>
+                construindo sistemas que{' '}
+                <span className="display-italic" style={{ color: 'var(--accent)' }}>
+                  importam
+                </span>{' '}
+                de verdade.
+              </RevealLine>
             </h2>
 
             {/* Bio paragraphs */}

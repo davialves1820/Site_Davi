@@ -1,5 +1,6 @@
 'use client'
 import { useEffect, useState } from 'react'
+import Magnetic from '@/components/Magnetic'
 
 const LINKS = [
   { href: '#about', label: 'About' },
@@ -49,25 +50,27 @@ export default function Nav() {
           ))}
         </ul>
 
-        <a
-          href="https://github.com/davialves1820"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="hidden md:flex items-center gap-2 label no-underline px-5 py-2.5 transition-all duration-300"
-          style={{ color: 'var(--text-muted)', border: '1px solid var(--border-md)' }}
-          onMouseEnter={e => {
-            const el = e.currentTarget as HTMLElement
-            el.style.color = 'var(--text)'
-            el.style.borderColor = 'rgba(13,13,13,0.28)'
-          }}
-          onMouseLeave={e => {
-            const el = e.currentTarget as HTMLElement
-            el.style.color = 'var(--text-muted)'
-            el.style.borderColor = 'var(--border-md)'
-          }}
-        >
-          GitHub ↗
-        </a>
+        <Magnetic strength={0.4} className="hidden md:block">
+          <a
+            href="https://github.com/davialves1820"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 label no-underline px-5 py-2.5 transition-all duration-300"
+            style={{ color: 'var(--text-muted)', border: '1px solid var(--border-md)' }}
+            onMouseEnter={e => {
+              const el = e.currentTarget as HTMLElement
+              el.style.color = 'var(--text)'
+              el.style.borderColor = 'rgba(13,13,13,0.28)'
+            }}
+            onMouseLeave={e => {
+              const el = e.currentTarget as HTMLElement
+              el.style.color = 'var(--text-muted)'
+              el.style.borderColor = 'var(--border-md)'
+            }}
+          >
+            GitHub ↗
+          </a>
+        </Magnetic>
 
         <button
           className="md:hidden flex flex-col gap-1.5 p-2"
