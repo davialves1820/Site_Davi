@@ -1,6 +1,7 @@
 'use client'
 import { useEffect, useRef, useState } from 'react'
 import { SKILLS } from '@/lib/data'
+import RevealLine from '@/components/RevealLine'
 
 export default function Skills() {
   const ref = useRef<HTMLDivElement>(null)
@@ -33,15 +34,12 @@ export default function Skills() {
           <div className="lg:col-span-9">
             <h2
               className="display text-[--text] mb-16"
-              style={{
-                fontSize: 'clamp(2rem, 4vw, 3.5rem)',
-                opacity: visible ? 1 : 0,
-                transform: visible ? 'translateY(0)' : 'translateY(24px)',
-                transition: 'opacity 0.9s ease 0.1s, transform 0.9s cubic-bezier(0.16,1,0.3,1) 0.1s',
-              }}
+              style={{ fontSize: 'clamp(2rem, 4vw, 3.5rem)' }}
             >
-              Tecnologias que uso<br />
-              <span className="display-italic" style={{ color: 'var(--accent)' }}>no dia a dia</span>
+              <RevealLine>Tecnologias que uso</RevealLine>
+              <RevealLine delay={0.12}>
+                <span className="display-italic" style={{ color: 'var(--accent)' }}>no dia a dia</span>
+              </RevealLine>
             </h2>
 
             {/* Skills as tag cloud rows per category */}

@@ -1,6 +1,8 @@
 'use client'
 import { useEffect, useRef, useState } from 'react'
 import { PERSONAL } from '@/lib/data'
+import RevealLine from '@/components/RevealLine'
+import Magnetic from '@/components/Magnetic'
 
 export default function Contact() {
   const ref = useRef<HTMLDivElement>(null)
@@ -52,8 +54,10 @@ export default function Contact() {
                   color: 'var(--text)',
                 }}
               >
-                Vamos<br />
-                <span style={{ color: 'var(--accent)' }}>conversar?</span>
+                <RevealLine>Vamos</RevealLine>
+                <RevealLine delay={0.12}>
+                  <span style={{ color: 'var(--accent)' }}>conversar?</span>
+                </RevealLine>
               </h2>
               <p style={{ color: 'var(--text-muted)', fontSize: '1rem', maxWidth: '480px', lineHeight: 1.7, marginTop: '1.5rem' }}>
                 Aberto a oportunidades, projetos desafiadores e boas ideias.
@@ -70,43 +74,45 @@ export default function Contact() {
                 transition: 'opacity 0.9s ease 0.3s, transform 0.9s cubic-bezier(0.16,1,0.3,1) 0.3s',
               }}
             >
-              <button
-                onClick={copyEmail}
-                className="group w-full text-left transition-all duration-500"
-                style={{
-                  background: 'none',
-                  border: 'none',
-                  borderTop: '1px solid var(--border-md)',
-                  borderBottom: '1px solid var(--border-md)',
-                  padding: '2.5rem 0',
-                  cursor: 'pointer',
-                }}
-                onMouseEnter={e => {
-                  (e.currentTarget as HTMLElement).style.borderColor = 'var(--accent)'
-                }}
-                onMouseLeave={e => {
-                  (e.currentTarget as HTMLElement).style.borderColor = 'var(--border-md)'
-                }}
-              >
-                <div className="flex justify-between items-center gap-4">
-                  <span
-                    className="display-italic"
-                    style={{
-                      fontSize: 'clamp(1.2rem, 3vw, 2.5rem)',
-                      color: 'var(--text)',
-                      wordBreak: 'break-all',
-                    }}
-                  >
-                    {PERSONAL.email}
-                  </span>
-                  <span
-                    className="label flex-shrink-0 transition-all duration-300"
-                    style={{ color: copied ? 'var(--accent)' : 'var(--text-muted)' }}
-                  >
-                    {copied ? '✓ copiado' : 'copiar'}
-                  </span>
-                </div>
-              </button>
+              <Magnetic strength={0.08} style={{ display: 'block' }}>
+                <button
+                  onClick={copyEmail}
+                  className="group w-full text-left transition-all duration-500"
+                  style={{
+                    background: 'none',
+                    border: 'none',
+                    borderTop: '1px solid var(--border-md)',
+                    borderBottom: '1px solid var(--border-md)',
+                    padding: '2.5rem 0',
+                    cursor: 'pointer',
+                  }}
+                  onMouseEnter={e => {
+                    (e.currentTarget as HTMLElement).style.borderColor = 'var(--accent)'
+                  }}
+                  onMouseLeave={e => {
+                    (e.currentTarget as HTMLElement).style.borderColor = 'var(--border-md)'
+                  }}
+                >
+                  <div className="flex justify-between items-center gap-4">
+                    <span
+                      className="display-italic"
+                      style={{
+                        fontSize: 'clamp(1.2rem, 3vw, 2.5rem)',
+                        color: 'var(--text)',
+                        wordBreak: 'break-all',
+                      }}
+                    >
+                      {PERSONAL.email}
+                    </span>
+                    <span
+                      className="label flex-shrink-0 transition-all duration-300"
+                      style={{ color: copied ? 'var(--accent)' : 'var(--text-muted)' }}
+                    >
+                      {copied ? '✓ copiado' : 'copiar'}
+                    </span>
+                  </div>
+                </button>
+              </Magnetic>
             </div>
 
             {/* Links row */}
