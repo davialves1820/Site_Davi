@@ -124,20 +124,22 @@ export default function Contact() {
               }}
             >
               {[
-                { label: 'GitHub', url: PERSONAL.github },
-                { label: 'LinkedIn', url: PERSONAL.linkedin },
-              ].map(({ label, url }) => (
+                { label: 'GitHub', url: PERSONAL.github, external: true },
+                { label: 'LinkedIn', url: PERSONAL.linkedin, external: true },
+                { label: 'Baixar CV', url: PERSONAL.resume, external: false },
+              ].map(({ label, url, external }) => (
                 <a
                   key={label}
                   href={url}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  target={external ? '_blank' : undefined}
+                  rel={external ? 'noopener noreferrer' : undefined}
+                  download={external ? undefined : true}
                   className="label no-underline transition-colors duration-300"
                   style={{ color: 'var(--text-muted)' }}
                   onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = 'var(--text)'}
                   onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = 'var(--text-muted)'}
                 >
-                  {label} ↗
+                  {label} {external ? '↗' : '↓'}
                 </a>
               ))}
             </div>

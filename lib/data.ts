@@ -10,43 +10,51 @@ export const PERSONAL = {
   github: 'https://github.com/davialves1820',
   linkedin: 'https://www.linkedin.com/in/davi-rodrigues-36750b2a5',
   resume: '/Davi_Alves_CV.pdf',
+  aboutHeadline: ['Full Stack, construindo', 'sistemas para o mundo real.'],
   bio: [
-    'Desenvolvedor Full Stack de 20 anos, católico apostólico romano e graduando em Ciência da Computação na UFPB desde 2023. Busco o desenvolvimento integral através do equilíbrio entre a fé, o intelecto e a saúde, integrando a disciplina dos esportes e a criatividade dos animes à minha rotina.',
-    'Apaixonado por criar soluções que impactam a vida real, atuo simultaneamente em pesquisa, liderança e desenvolvimento de produtos. Co-fundei e lidero a Connecta CI, grupo de tecnologia da UFPB, e atuo como desenvolvedor no laboratório LAVID e na CODATA, a Companhia de Processamento de Dados da Paraíba.',
-    'Minhas áreas de interesse concentram-se no desenvolvimento web, observabilidade de sistemas, DevOps e programação competitiva. Conquistei o 3º lugar na OPI 2025 e aplico raciocínio lógico e eficiência algorítmica para construir sistemas escaláveis e inteligentes.',
+    'Atuo em três frentes ao mesmo tempo: desenvolvimento de produtos, pesquisa e liderança técnica. Na CODATA e no LAVID, trabalho com observabilidade e performance de sistemas governamentais da Paraíba — pipelines de métricas, monitoramento em produção e modernização de infraestrutura pública. Como co-fundador da Connecta CI, estruturei do zero um grupo de tecnologia na UFPB, definindo processos de engenharia e formando a equipe inicial.',
+    'Minhas áreas de foco são desenvolvimento web, observabilidade, DevOps e programação competitiva — conquistei o 3º lugar na OPI 2025 aplicando raciocínio algorítmico para resolver problemas com eficiência. Gosto de código limpo, sistemas que escalam e soluções que resolvem problemas concretos de pessoas reais.',
+    'Tenho 20 anos e curso Ciência da Computação na UFPB desde 2023. Fora do código, equilibro disciplina e criatividade entre esportes, animes e a fé que orienta minha rotina — princípios que levo também para a forma como construo e lidero.',
   ],
+  contextPhoto: '/davi-contexto.jpg',
 }
 
 export const SKILLS = [
   {
     icon: '⚡',
     title: 'Frontend',
-    tags: ['React', 'Next.js', 'TypeScript', 'JavaScript', 'HTML5', 'CSS3'],
+    main: ['React', 'Next.js', 'TypeScript'],
+    familiar: ['JavaScript', 'HTML5', 'CSS3'],
   },
   {
     icon: '🔧',
     title: 'Backend',
-    tags: ['Python', 'Node.js', 'NestJS', 'Django', 'Express.js', 'APIs REST', 'C / C++', 'Java'],
+    main: ['Python', 'Node.js', 'APIs REST'],
+    familiar: ['NestJS', 'Django', 'Express.js', 'C / C++', 'Java'],
   },
   {
     icon: '🗄️',
     title: 'Banco de Dados',
-    tags: ['PostgreSQL', 'MongoDB', 'Redis', 'Prisma', 'Sequelize'],
+    main: ['PostgreSQL', 'MongoDB'],
+    familiar: ['Redis', 'Prisma', 'Sequelize'],
   },
   {
     icon: '🚀',
     title: 'DevOps & Infra',
-    tags: ['Docker', 'Linux', 'Git / GitHub', 'GitHub Actions', 'Grafana', 'CI/CD'],
+    main: ['Docker', 'Git / GitHub', 'Grafana'],
+    familiar: ['Linux', 'GitHub Actions', 'CI/CD'],
   },
   {
     icon: '📡',
     title: 'IoT & Protocolos',
-    tags: ['MQTT', 'LoRa', 'Geolocalização', 'Tempo Real', 'WebSocket'],
+    main: ['MQTT', 'LoRa'],
+    familiar: ['Geolocalização', 'Tempo Real', 'WebSocket'],
   },
   {
     icon: '🤖',
     title: 'Eng. de Software',
-    tags: ['Clean Code', 'SOLID', 'Design Patterns', 'Microserviços', 'TDD', 'Jest', 'Postman', 'Scrum', 'Kanban'],
+    main: ['Clean Code', 'SOLID', 'TDD'],
+    familiar: ['Design Patterns', 'Microserviços', 'Jest', 'Postman', 'Scrum', 'Kanban'],
   },
 ]
 
@@ -67,11 +75,11 @@ export const EXPERIENCES: Experience[] = [
     company: 'CODATA — Companhia de Processamento de Dados da Paraíba',
     stack: ['Python', 'Grafana', 'Docker', 'Git'],
     bullets: [
-      'Desenvolvimento Full Stack em Python com foco em análise de performance de sistemas governamentais do estado da Paraíba.',
-      'Implementação de pipelines de coleta, processamento e visualização de métricas de desempenho em produção.',
-      'Aplicação de boas práticas de Engenharia de Software: versionamento semântico, revisão de código e documentação técnica.',
-      'Integração de ferramentas de monitoramento e geração de relatórios automatizados para a administração pública estadual.',
-      'Colaboração em soluções para modernização de sistemas da administração pública estadual da Paraíba.',
+      'Monitoro a performance de sistemas governamentais do estado da Paraíba em produção, com foco em observabilidade e disponibilidade.',
+      'Construo dashboards e pipelines de métricas no Grafana para dar visibilidade em tempo real ao desempenho da infraestrutura.',
+      'Padronizo o versionamento e a documentação técnica dos serviços internos, reduzindo o tempo de troubleshooting da equipe.',
+      'Contribuo com a modernização de infraestrutura pública, containerizando serviços legados com Docker.',
+      '[MÉTRICA: nº de sistemas monitorados / redução de tempo de resposta a incidentes]',
     ],
   },
   {
@@ -81,11 +89,11 @@ export const EXPERIENCES: Experience[] = [
     company: 'Laboratório LAVID · UFPB',
     stack: ['Python', 'React', 'Docker', 'Grafana'],
     bullets: [
-      'Desenvolvimento Full Stack em Python com foco em análise de performance de sistemas governamentais.',
-      'Implementação de pipelines de coleta, processamento e visualização de métricas de desempenho.',
-      'Aplicação de boas práticas de Engenharia de Software: versionamento semântico, revisão de código e documentação técnica.',
-      'Integração de ferramentas de monitoramento e geração de relatórios automatizados.',
-      'Colaboração em soluções para modernização de sistemas da administração pública estadual.',
+      'Participo de pesquisa aplicada em observabilidade, prototipando novas abordagens de coleta e análise de métricas de sistemas governamentais.',
+      'Desenvolvo features full stack (Python + React) para as ferramentas internas do laboratório usadas nesses estudos.',
+      'Escrevo relatórios técnicos e documentação de experimentos para publicação e transferência de conhecimento ao setor público.',
+      'Automatizo a geração de relatórios de desempenho a partir dos dados coletados em produção.',
+      '[MÉTRICA: nº de sistemas públicos modernizados / experimentos conduzidos]',
     ],
   },
   {
@@ -153,14 +161,99 @@ export const EXPERIENCES: Experience[] = [
   },
 ]
 
-export const PROJECTS = [
+export interface ShowcaseProject {
+  slug: string
+  name: string
+  problem: string
+  solution: string
+  result: string
+  stack: string[]
+  mediaType: 'image' | 'video'
+  mediaAlt: string
+  mediaSrc?: string
+  demoUrl?: string
+  repoUrl?: string
+  credit?: string
+  placeholder?: boolean
+}
+
+// Projetos em destaque — seção de vitrine (#projects).
+// Preencha mediaSrc (arquivo em /public/projects/), demoUrl e repoUrl quando disponíveis.
+export const SHOWCASE_PROJECTS: ShowcaseProject[] = [
   {
-    name: 'Central Católica',
-    desc: 'Plataforma religiosa completa com Bíblia Sagrada, Liturgia Diária, Calendário Litúrgico, Orações, Santos do Dia e Notícias do Vaticano — feita para católicos que buscam aprofundar a fé no dia a dia.',
+    slug: 'meu-canto-catolico',
+    name: 'Meu Canto Católico',
+    problem: 'Católicos que buscam viver a fé no dia a dia precisam consultar vários sites diferentes para liturgia, Bíblia, orações, notícias da Igreja e entre outras informações.',
+    solution: 'Portal católico completo — Bíblia Sagrada, Liturgia Diária com comentário exegético, Calendário Litúrgico, orações (incluindo o Terço), Santos do Dia, catequese, notícias do Vaticano, tudo e muito mais em um só lugar.',
+    result: 'Rotina espiritual diária centralizada para a comunidade católica de língua portuguesa.',
     stack: ['Next.js', 'TypeScript', 'Tailwind', 'APIs'],
-    url: 'https://central-catolica.vercel.app/',
-    live: true,
+    mediaType: 'image',
+    mediaAlt: 'Tela inicial do Meu Canto Católico com a liturgia diária e orações',
+    demoUrl: 'https://www.meucantocatolico.com.br/',
+    repoUrl: 'https://github.com/davialves1820/Meu-Canto-Catolico',
+    // mediaSrc: '/projects/meu-canto-catolico.webp', // TODO: [MÍDIA]
   },
+  {
+    slug: 'aquario',
+    name: 'Aquário',
+    problem: 'Estudantes do CI/UFPB sem um lugar central para murais de laboratórios, vagas e eventos.',
+    solution: 'Contribuo com o desenvolvimento frontend e UX da plataforma central de informações e oportunidades do CI, colaborando com pipelines de qualidade via GitHub Actions.',
+    result: 'Acesso facilitado a oportunidades para centenas de estudantes.',
+    stack: ['React', 'Next.js', 'Git', 'GitHub Actions', 'UX'],
+    mediaType: 'image',
+    mediaAlt: 'Tela inicial da plataforma Aquário, mural de oportunidades do CI/UFPB',
+    demoUrl: 'https://www.aquarioufpb.com/',
+    repoUrl: 'https://github.com/aquario-ufpb/aquario',
+    credit: 'Projeto open source colaborativo',
+    // mediaSrc: '/projects/aquario.webp', // TODO: [MÍDIA]
+  },
+  {
+    slug: 'connecta-ci',
+    name: 'Connecta CI',
+    // Descrição inferida a partir do site (conteúdo dinâmico limitou o fetch) — revise se necessário.
+    problem: 'A Connecta CI precisava de uma presença digital profissional para apresentar o estúdio, a equipe e os projetos do grupo à comunidade da UFPB e a possíveis parceiros.',
+    solution: 'Site institucional do estúdio de software Connecta CI, apresentando a equipe, os serviços e o portfólio de projetos desenvolvidos pelo grupo.',
+    result: 'Presença digital profissional para atrair novos membros e parceiros.',
+    stack: ['Next.js', 'TypeScript', 'Tailwind'],
+    mediaType: 'image',
+    mediaAlt: 'Tela inicial do site institucional da Connecta CI',
+    demoUrl: 'https://connectaci.com.br/',
+    credit: 'Desenvolvido com Pedro Falconi, Caio Rafael Oliveira e Gabriel Ribeiro',
+    // mediaSrc: '/projects/connecta-ci.webp', // TODO: [MÍDIA]
+    // repoUrl: '', // TODO: [LINK_REPO]
+  },
+  {
+    slug: 'connecta-hub',
+    name: 'Connecta Hub',
+    // Descrição inferida a partir do site (conteúdo dinâmico limitou o fetch) — revise se necessário.
+    problem: 'Baixo engajamento dos estudantes com atividades acadêmicas e extracurriculares da comunidade.',
+    solution: 'Plataforma de gamificação acadêmica da Connecta CI, usando mecânicas de jogo para incentivar a participação dos estudantes.',
+    result: 'Maior engajamento dos estudantes com as atividades acadêmicas e extracurriculares da comunidade.',
+    stack: ['Next.js', 'TypeScript', 'Tailwind'],
+    mediaType: 'image',
+    mediaAlt: 'Tela inicial da plataforma Connecta Hub',
+    demoUrl: 'https://connectahub.dev.br/',
+    credit: 'Desenvolvido com Pedro Falconi, Caio Rafael Oliveira e Gabriel Ribeiro',
+    // mediaSrc: '/projects/connecta-hub.webp', // TODO: [MÍDIA]
+    // repoUrl: '', // TODO: [LINK_REPO]
+  },
+  {
+    slug: 'dignare',
+    name: 'Dignare',
+    problem: 'Cuidado paliativo fragmentado — muitos médicos, muitos protocolos e poucas respostas coordenadas para pacientes e famílias.',
+    solution: 'Plataforma web para o ecossistema Dignare, apresentando os três pilares da empresa: cuidado ao paciente, capacitação de profissionais de saúde e consultoria institucional em dignidade e cuidados paliativos.',
+    result: 'Presença digital unificada para os serviços de cuidado, formação e consultoria da Dignare.',
+    stack: ['Next.js', 'TypeScript', 'Tailwind'],
+    mediaType: 'image',
+    mediaAlt: 'Tela inicial da plataforma Dignare, ecossistema de cuidados paliativos',
+    demoUrl: 'https://www.ecossistemadignare.com/',
+    credit: 'Desenvolvido em parceria com Pedro Falconi',
+    // mediaSrc: '/projects/dignare.webp', // TODO: [MÍDIA]
+    // repoUrl: '', // TODO: [LINK_REPO]
+  },
+]
+
+export const PROJECTS = [
   {
     name: 'Algoritmos de Otimização (TSP)',
     desc: 'Solução para o Problema do Caixeiro Viajante aplicada à cidade de João Pessoa. Implementa e compara múltiplos algoritmos heurísticos com visualização de rotas no mapa real.',
