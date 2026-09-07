@@ -1,10 +1,12 @@
 'use client'
 import { useEffect, useState } from 'react'
 import Magnetic from '@/components/Magnetic'
+import { PERSONAL } from '@/lib/data'
 
 const LINKS = [
   { href: '#about', label: 'About' },
   { href: '#skills', label: 'Stack' },
+  { href: '#projects', label: 'Work' },
   { href: '#experience', label: 'Experience' },
   { href: '#contact', label: 'Contact' },
 ]
@@ -50,27 +52,50 @@ export default function Nav() {
           ))}
         </ul>
 
-        <Magnetic strength={0.4} className="hidden md:block">
-          <a
-            href="https://github.com/davialves1820"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-2 label no-underline px-5 py-2.5 transition-all duration-300"
-            style={{ color: 'var(--text-muted)', border: '1px solid var(--border-md)' }}
-            onMouseEnter={e => {
-              const el = e.currentTarget as HTMLElement
-              el.style.color = 'var(--text)'
-              el.style.borderColor = 'rgba(13,13,13,0.28)'
-            }}
-            onMouseLeave={e => {
-              const el = e.currentTarget as HTMLElement
-              el.style.color = 'var(--text-muted)'
-              el.style.borderColor = 'var(--border-md)'
-            }}
-          >
-            GitHub ↗
-          </a>
-        </Magnetic>
+        <div className="hidden md:flex items-center gap-4">
+          <Magnetic strength={0.4}>
+            <a
+              href={PERSONAL.resume}
+              download
+              className="flex items-center gap-2 label no-underline px-5 py-2.5 transition-all duration-300"
+              style={{ color: 'var(--text-muted)', border: '1px solid var(--border-md)' }}
+              onMouseEnter={e => {
+                const el = e.currentTarget as HTMLElement
+                el.style.color = 'var(--text)'
+                el.style.borderColor = 'rgba(13,13,13,0.28)'
+              }}
+              onMouseLeave={e => {
+                const el = e.currentTarget as HTMLElement
+                el.style.color = 'var(--text-muted)'
+                el.style.borderColor = 'var(--border-md)'
+              }}
+            >
+              Baixar CV
+            </a>
+          </Magnetic>
+
+          <Magnetic strength={0.4}>
+            <a
+              href="https://github.com/davialves1820"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 label no-underline px-5 py-2.5 transition-all duration-300"
+              style={{ color: 'var(--text-muted)', border: '1px solid var(--border-md)' }}
+              onMouseEnter={e => {
+                const el = e.currentTarget as HTMLElement
+                el.style.color = 'var(--text)'
+                el.style.borderColor = 'rgba(13,13,13,0.28)'
+              }}
+              onMouseLeave={e => {
+                const el = e.currentTarget as HTMLElement
+                el.style.color = 'var(--text-muted)'
+                el.style.borderColor = 'var(--border-md)'
+              }}
+            >
+              GitHub ↗
+            </a>
+          </Magnetic>
+        </div>
 
         <button
           className="md:hidden flex flex-col gap-1.5 p-2"
@@ -106,6 +131,17 @@ export default function Nav() {
               </a>
             </li>
           ))}
+          <li>
+            <a
+              href={PERSONAL.resume}
+              download
+              onClick={() => setMenuOpen(false)}
+              className="label no-underline"
+              style={{ color: 'var(--text-muted)' }}
+            >
+              Baixar CV
+            </a>
+          </li>
         </ul>
       </div>
     </>

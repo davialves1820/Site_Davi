@@ -60,10 +60,13 @@ export default function Skills() {
                     <span className="label" style={{ color: 'var(--text-muted)' }}>{skill.title}</span>
                   </div>
 
-                  {/* Tags */}
-                  <div className="col-span-12 md:col-span-9 flex flex-wrap gap-2">
-                    {skill.tags.map((tag: string) => (
-                      <SkillTag key={tag} tag={tag} />
+                  {/* Tags — principais em destaque, familiaridade menor */}
+                  <div className="col-span-12 md:col-span-9 flex flex-wrap items-center gap-2">
+                    {skill.main.map((tag: string) => (
+                      <SkillTag key={tag} tag={tag} size="main" />
+                    ))}
+                    {skill.familiar.map((tag: string) => (
+                      <SkillTag key={tag} tag={tag} size="familiar" />
                     ))}
                   </div>
                 </div>
@@ -76,20 +79,24 @@ export default function Skills() {
   )
 }
 
-function SkillTag({ tag }: { tag: string }) {
+function SkillTag({ tag, size = 'main' }: { tag: string; size?: 'main' | 'familiar' }) {
   const [hovered, setHovered] = useState(false)
+  const isMain = size === 'main'
   return (
     <span
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      className="mono text-xs px-4 py-2 transition-all duration-300 cursor-default"
+      className="mono transition-all duration-300 cursor-default"
       style={{
         border: '1px solid',
         borderColor: hovered ? 'var(--accent)' : 'var(--border-md)',
-        color: hovered ? 'var(--accent)' : 'var(--text-muted)',
+        color: hovered ? 'var(--accent)' : isMain ? 'var(--text)' : 'var(--text-muted)',
         background: hovered ? 'var(--accent-dim)' : 'transparent',
-        fontSize: '0.72rem',
+        fontWeight: isMain ? 500 : 400,
+        fontSize: isMain ? '0.78rem' : '0.65rem',
         letterSpacing: '0.08em',
+        padding: isMain ? '0.5rem 1.1rem' : '0.4rem 0.85rem',
+        opacity: isMain ? 1 : 0.75,
       }}
     >
       {tag}

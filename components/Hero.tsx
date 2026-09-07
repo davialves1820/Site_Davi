@@ -1,6 +1,8 @@
 'use client'
 import { useEffect, useState } from 'react'
+import Image from 'next/image'
 import { PERSONAL } from '@/lib/data'
+import daviPortrait from '@/public/Davi.jpeg'
 
 export default function Hero() {
   const [visible, setVisible] = useState(false)
@@ -78,9 +80,59 @@ export default function Hero() {
         </div>
       </div>
 
+      {/* Portrait — ocupa a coluna direita, altura equivalente ao bloco do nome */}
+      <div
+        className="absolute overflow-hidden hidden sm:block"
+        style={{
+          top: '50%',
+          left: '73vw',
+          right: 'clamp(1.5rem, 5vw, 5rem)',
+          aspectRatio: '4 / 5',
+          borderRadius: '14px',
+          zIndex: 2,
+          opacity: visible ? fadeOut : 0,
+          clipPath: visible ? 'inset(0 0 0 0)' : 'inset(100% 0 0 0)',
+          transform: visible ? 'translateY(-50%) scale(1)' : 'translateY(-50%) scale(0.95)',
+          transition: 'clip-path 1.1s cubic-bezier(0.16,1,0.3,1) 0.5s, transform 1.1s cubic-bezier(0.16,1,0.3,1) 0.5s, opacity 0.3s ease',
+        }}
+      >
+        <Image
+          src={daviPortrait}
+          alt="Retrato de Davi Alves, desenvolvedor full stack"
+          placeholder="blur"
+          sizes="27vw"
+          style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+          priority
+        />
+      </div>
+
+      {/* Portrait mobile — em fluxo normal, logo abaixo do nome e acima do meta row */}
+      <div className="container-editorial relative flex justify-end sm:hidden mb-6" style={{ zIndex: 2 }}>
+        <div
+          className="overflow-hidden"
+          style={{
+            width: 'clamp(96px, 28vw, 150px)',
+            aspectRatio: '4 / 5',
+            borderRadius: '12px',
+            opacity: visible ? fadeOut : 0,
+            clipPath: visible ? 'inset(0 0 0 0)' : 'inset(100% 0 0 0)',
+            transform: visible ? 'scale(1)' : 'scale(0.95)',
+            transition: 'clip-path 1.1s cubic-bezier(0.16,1,0.3,1) 0.5s, transform 1.1s cubic-bezier(0.16,1,0.3,1) 0.5s, opacity 0.3s ease',
+          }}
+        >
+          <Image
+            src={daviPortrait}
+            alt="Retrato de Davi Alves, desenvolvedor full stack"
+            placeholder="blur"
+            sizes="150px"
+            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+          />
+        </div>
+      </div>
+
       {/* Bottom meta row */}
       <div
-        className="container-editorial relative flex justify-between items-end"
+        className="container-editorial relative flex items-end"
         style={{
           zIndex: 2,
           opacity: visible ? 1 : 0,

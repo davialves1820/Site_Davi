@@ -146,6 +146,16 @@ body {
   transform: translateY(0);
 }
 
+/* ─── Hide scrollbar (carousel) ──────────────────────── */
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
 /* ─── Scrollbar ──────────────────────────────────────── */
 ::-webkit-scrollbar {
   width: 3px;
@@ -164,6 +174,14 @@ body {
 ::selection {
   background: var(--accent);
   color: #fff;
+}
+
+/* ─── Keyboard focus ─────────────────────────────────── */
+a:focus-visible,
+button:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
 }
 
 /* ─── Keyframes ──────────────────────────────────────── */
