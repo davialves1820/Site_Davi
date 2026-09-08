@@ -191,7 +191,7 @@ export const SHOWCASE_PROJECTS: ShowcaseProject[] = [
     mediaAlt: 'Tela inicial do Meu Canto Católico com a liturgia diária e orações',
     demoUrl: 'https://www.meucantocatolico.com.br/',
     repoUrl: 'https://github.com/davialves1820/Meu-Canto-Catolico',
-    // mediaSrc: '/projects/meu-canto-catolico.webp', // TODO: [MÍDIA]
+    mediaSrc: '/meu-canto.png',
   },
   {
     slug: 'aquario',
@@ -205,7 +205,7 @@ export const SHOWCASE_PROJECTS: ShowcaseProject[] = [
     demoUrl: 'https://www.aquarioufpb.com/',
     repoUrl: 'https://github.com/aquario-ufpb/aquario',
     credit: 'Projeto open source colaborativo',
-    // mediaSrc: '/projects/aquario.webp', // TODO: [MÍDIA]
+    mediaSrc: '/aquariopg.png',
   },
   {
     slug: 'connecta-ci',
@@ -219,22 +219,21 @@ export const SHOWCASE_PROJECTS: ShowcaseProject[] = [
     mediaAlt: 'Tela inicial do site institucional da Connecta CI',
     demoUrl: 'https://connectaci.com.br/',
     credit: 'Desenvolvido com Pedro Falconi, Caio Rafael Oliveira e Gabriel Ribeiro',
-    // mediaSrc: '/projects/connecta-ci.webp', // TODO: [MÍDIA]
+    mediaSrc: '/conecta-ld.png',
     // repoUrl: '', // TODO: [LINK_REPO]
   },
   {
     slug: 'connecta-hub',
     name: 'Connecta Hub',
-    // Descrição inferida a partir do site (conteúdo dinâmico limitou o fetch) — revise se necessário.
-    problem: 'Baixo engajamento dos estudantes com atividades acadêmicas e extracurriculares da comunidade.',
-    solution: 'Plataforma de gamificação acadêmica da Connecta CI, usando mecânicas de jogo para incentivar a participação dos estudantes.',
-    result: 'Maior engajamento dos estudantes com as atividades acadêmicas e extracurriculares da comunidade.',
+    problem: 'Membros da comunidade Connecta CI sem um lugar central para descobrir projetos, grupos e vagas para participar.',
+    solution: 'Hub colaborativo com catálogo de projetos, grupos e vagas da comunidade, com sistema de curtidas para destacar as iniciativas mais ativas.',
+    result: 'Mais de 70 projetos catalogados, facilitando a descoberta e o engajamento entre membros da comunidade.',
     stack: ['Next.js', 'TypeScript', 'Tailwind'],
     mediaType: 'image',
-    mediaAlt: 'Tela inicial da plataforma Connecta Hub',
+    mediaAlt: 'Catálogo de projetos da plataforma Connecta Hub',
     demoUrl: 'https://connectahub.dev.br/',
     credit: 'Desenvolvido com Pedro Falconi, Caio Rafael Oliveira e Gabriel Ribeiro',
-    // mediaSrc: '/projects/connecta-hub.webp', // TODO: [MÍDIA]
+    mediaSrc: '/conecta-hub.png',
     // repoUrl: '', // TODO: [LINK_REPO]
   },
   {
@@ -248,7 +247,7 @@ export const SHOWCASE_PROJECTS: ShowcaseProject[] = [
     mediaAlt: 'Tela inicial da plataforma Dignare, ecossistema de cuidados paliativos',
     demoUrl: 'https://www.ecossistemadignare.com/',
     credit: 'Desenvolvido em parceria com Pedro Falconi',
-    // mediaSrc: '/projects/dignare.webp', // TODO: [MÍDIA]
+    mediaSrc: '/dignare.png',
     // repoUrl: '', // TODO: [LINK_REPO]
   },
 ]
